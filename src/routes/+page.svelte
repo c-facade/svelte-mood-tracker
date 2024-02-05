@@ -5,10 +5,25 @@
 	const moods= [ 
 		{
 			name: 'great', 
-			value: 5},
-		{name: 'good',
-			value: 4}
-		, 'okay', 'not so good', 'bad'];
+			value: 5
+		},
+		{
+			name: 'good',
+			value: 4
+		},
+		{
+			name: 'okay',
+			value: 3,
+		},
+		{
+			name: 'not so good',
+			value: 2,
+		},
+		{
+			name: 'bad',
+			value: 1
+		}
+	];
 </script>
 
 <form>
@@ -20,6 +35,7 @@
 			<label for="mood-{mood.value}">{mood.name}</label>
 			<p>
 		{/each}
+	<button type="submit">Save</button>
 	</fieldset>
 </form>
 

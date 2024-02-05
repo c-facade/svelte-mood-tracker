@@ -5,7 +5,9 @@
 	<a href="/about">About</a>
 </nav>
 
-<slot></slot>
+<div style="margin: 5px; margin-left: 15px;">
+	<slot></slot>
+</div>
 
 <style>
 	nav {
