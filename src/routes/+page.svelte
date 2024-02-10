@@ -1,7 +1,8 @@
 <h1>Mood Tracker</h1>
 <p> Track your mood! </p>
 
-<script>
+<script lang="ts">
+	import { activities } from '../store.ts';
 	const moods= [ 
 		{
 			name: 'great', 
@@ -33,6 +34,23 @@
 			entries = [`${key}: ${value}`, ...entries];
 		}
 	}
+
+	function yeas(e) {
+		const formData = new FormData(e.target);
+		for(const [, value] of formData) {
+			console.log(`You did ${value} today. Slay.`);
+		}
+	}
+
+	let newActivity = "";
+	
+	function addActivity() {
+		if(newActivity != ""){
+			activities.addActivity(newActivity);
+		}
+		newActivity = "";
+	}
+
 </script>
 
 <form on:submit|preventDefault={addEntry}>
@@ -48,6 +66,27 @@
 	</fieldset>
 </form>
 
+<form on:submit|preventDefault={yeas}>
+	<fieldset>
+		<legend>What did you do?</legend>
+		{#each $activities as [ , activity]}
+			<input type="checkbox" name={activity.name} id={activity.id} value={activity.name} />
+			<label for={activity.id}>{activity.name}</label><br/>
+		{/each}
+		<button type="submit">OK</button>
+	</fieldset>
+</form>
+
+<form class="insert">
+	<legend>Add a new activity</legend>
+	<input type="text" placeholder="Swim" bind:value={newActivity}/>
+	<br/>
+	<p>
+		The new activity will be {newActivity}
+	</p>
+	<button on:click={addActivity}>Add</button>
+</form>
+
 <div style="margin:10px; padding:2px; border: solid 1px black;">
 	{#each entries as entry}
 		<p class="diary-entry">
@@ -59,5 +98,14 @@
 <style>
 	form {
 		margin: 5px;
+	}
+	.insert{
+		margin: 10px;
+		border: solid 1px black;
+		padding: 5px;
+		line-height: 1.5em;
+	}
+	.insert legend {
+		margin:2px;
 	}
 </style>
