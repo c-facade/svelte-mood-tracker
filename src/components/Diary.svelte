@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {moods} from '../db';
 	import type { Mood } from '../db';
-	import type { Entry } from '../entriesStore';
 	import { diary } from '../entriesStore';
+	/*
 	const getMood = (entries: Entry[]) =>
 	{
 		if(entries[0].activityName == "mood"){
@@ -14,14 +14,25 @@
 			return "";
 		}
 	};
+	*/
+	const getMood = (value : number | boolean) => {
+		if( typeof value == 'boolean') return 'error';
+		console.log(value)
+		const mood : Mood | undefined = moods.find((m) => m.value == value);
+		console.log(mood)
+		return ((mood != undefined) ? mood.name : 'unknown');
+	};
+
 </script>
 
 {#each $diary as diarypage}
-	<h2>{getMood(diarypage.entries)}</h2>
 	<h3>{diarypage.date.toLocaleDateString()}</h3>
 	{#each diarypage.entries as entry}
-
-		<p>{entry.activityName}</p>
+		{#if entry.activityName == 'mood'}
+			<h2 class="mood">{getMood(entry.value)}</h2>
+		{:else}
+			<p class="entry">{entry.activityName}</p>
+		{/if}
 	{/each}
 {:else}
 	Your entries will be shown here

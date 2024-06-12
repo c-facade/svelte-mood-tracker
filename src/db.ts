@@ -13,17 +13,6 @@ export interface Mood {
 	value: number;
 }
 
-// it's an instance of an Activity
-export interface Entry {
-	activity : Activity;
-	value: number | boolean;
-}
-
-export interface DiaryPage {
-	mood : Mood;
-	entries : Entry[];
-}
-
 export const moods : Mood[] = [ 
 	{
 		id: 1,

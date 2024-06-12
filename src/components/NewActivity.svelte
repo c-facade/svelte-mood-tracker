@@ -3,9 +3,10 @@
 
 	let newActivity = "";
 
-	function addActivity() {
+	function add() {
 		if(newActivity != ""){
 			activities.addActivity(newActivity);
+			console.log($activities)
 			}
 		newActivity = "";
 	}
@@ -15,5 +16,5 @@
 <form class="insert">
 	<legend>Add a new activity</legend>
 	<input type="text" placeholder="Swim" bind:value={newActivity}/>
-	<button on:click={addActivity}>Add</button>
+	<button on:click|preventDefault={add}>Add</button>
 </form>

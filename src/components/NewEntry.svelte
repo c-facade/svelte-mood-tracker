@@ -20,7 +20,7 @@
 		{
 			activityName: 'mood',
 			activityId: 'Gk39rf',
-			value: mood
+			value: Number(mood)
 		});
 		for( const [key, value] of formData) {
 			entries.push(
@@ -50,7 +50,7 @@
 	<fieldset>
 		<legend>What did you do?</legend>
 		{#each $activities as activity}
-			<input type="checkbox" name={activity.name} id={activity.id} value={activity} />
+			<input type="checkbox" name={activity.name} id={activity.id} value={activity.id} />
 			<label for={activity.id}>{activity.name}</label><br/>
 		{/each}
 		<NewActivity/>
