@@ -2,24 +2,10 @@
 	import {moods} from '../db';
 	import type { Mood } from '../db';
 	import { diary } from '../entriesStore';
-	/*
-	const getMood = (entries: Entry[]) =>
-	{
-		if(entries[0].activityName == "mood"){
-			let value = entries[0].value;
-			const mood : Mood | undefined = moods.find((m) => m.value === value);
-			return (mood ? mood.name : 'unknown');
-		}
-		else{
-			return "";
-		}
-	};
-	*/
+	
 	const getMood = (value : number | boolean) => {
 		if( typeof value == 'boolean') return 'error';
-		console.log(value)
 		const mood : Mood | undefined = moods.find((m) => m.value == value);
-		console.log(mood)
 		return ((mood != undefined) ? mood.name : 'unknown');
 	};
 

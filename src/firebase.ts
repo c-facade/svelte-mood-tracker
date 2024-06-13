@@ -1,11 +1,12 @@
 import { app } from './firebaseConf';
 import { getAuth } from "firebase/auth";
-import { collection, doc, getFirestore } from 'firebase/firestore/lite';
+import { doc, getFirestore } from 'firebase/firestore/lite';
 
 const auth = getAuth(app);
-let db = getFirestore(app);
-const userDoc = (userId) => doc(db, "users", userId)
+const db = getFirestore(app);
+// funzione che recupera il documento dell'utente
+export const userDoc = (userId: string) => doc(db, "users", userId)
 
 export {
-	auth,
+	auth
 }

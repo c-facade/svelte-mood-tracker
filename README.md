@@ -1,38 +1,30 @@
-# create-svelte
+# Svelte Mood Tracker
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Svelte Mood Tracker is a web application that allows the user to track their activities, feelings and overall mood.
 
-## Creating a project
+This is a project for the course Web Application Development(Sviluppo di Applicazioni Web) at the University of Pisa.
 
-If you're seeing this, you've probably already done this step. Congrats!
+This application is written using Svelte and hosted in cloudflare pages.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Specifications
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+This application will:
 
-## Developing
+- Allow the user to record data on their mood
+- Show diagrams showing overview and correlations.
+- Use end-to-end encryption to ensure complete privacy
+- Send notifications to remind the user to insert data and view weekly/monthly reports.
+- Work offline and syncronize when it's back online.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Next
 
-```bash
-npm run dev
+To do:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Put "diary", "new entry" and "activities" in different pages.
+	- "Diary" will have the list of previous entries.
+	- "New entry" will allow the user to input a new entry.
+	- "Activities" will allow the user to add new activities, change their names, and hide them.
+- Make a store for diary entries
+- Implement server syncronisation.
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+I'm not making the CSS better for a while.
