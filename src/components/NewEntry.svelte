@@ -26,7 +26,7 @@
 			entries.push(
 			{
 				activityName: key,
-				activityId: value,
+				activityId: String(value),
 				value: true
 			});
 		}
