@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { activities } from '../db';
+	import { activities } from '../activitiesStore';
 
 	let newActivity = "";
 

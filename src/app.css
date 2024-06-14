@@ -2,3 +2,8 @@ html, body {
 	background-color: #263238;
 	color: white;
 }
+
+main {
+	max-width: 1000px;
+	margin: auto;
+}

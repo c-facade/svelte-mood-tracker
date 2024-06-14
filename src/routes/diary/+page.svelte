@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Diary from '/src/components/Diary.svelte';
+	import Diary from "../../components/Diary.svelte";
 </script>
 
 <h1>

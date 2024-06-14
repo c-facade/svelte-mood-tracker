@@ -72,35 +72,3 @@ function createActStore(){
 
 export const activities = createActStore();
 
-// ROUTES -------------------------------------
-
-
-export const routes = [
-	{
-		name: 'home',
-		link: '/'
-	},
-	{
-		name: 'diary',
-		link: 'diary'
-	},
-	{
-		name: 'statistics',
-		link: 'stats'
-	},	
-	{
-		name: 'settings',
-		link: 'settings'
-	},
-	
-	{
-		name: 'about',
-		link: 'about'
-	},
-	{
-		name: 'account',
-		link: 'account'
-	}
-];
-
-export const selectedTab = writable(routes[0]);

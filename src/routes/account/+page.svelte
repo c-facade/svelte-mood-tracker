@@ -6,7 +6,7 @@
   import { setDoc } from 'firebase/firestore/lite';
 	import {userSettings} from "../../userStore";
 	import { isLoggedIn } from "../../userStore";
-    import {routes, selectedTab} from "../../db";
+    import {routes, selectedTab} from "../../activitiesStore";
 	
 	let error : string;
 
@@ -39,7 +39,7 @@
 </script>
 
 {#if $isLoggedIn}
-	<h4>{auth.currentUser.displayName}</h4>
+	<h4>{auth.currentUser ? auth.currentUser.displayName : "error"}</h4>
 	<button on:click={logout} class="danger">Log out</button>
 {:else}
 <div>

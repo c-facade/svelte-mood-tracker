@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { moods, activities } from '../db';
+	import { moods, activities } from '../activitiesStore';
 	import { diary } from '../entriesStore';
 	import type { Entry, DiaryPage } from '../entriesStore';
     import NewActivity from './NewActivity.svelte';
