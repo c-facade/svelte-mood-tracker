@@ -29,7 +29,9 @@
 	}
 
 	onAuthStateChanged(auth, (user) => {
-		if(user) $isLoggedIn = true
+		if(user){
+			$isLoggedIn = true
+		}
 		else $isLoggedIn = false;
 	});
 </script>

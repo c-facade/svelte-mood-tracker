@@ -11,6 +11,7 @@
 	}
 </style>
 
+
 <nav>
 	<a href="/">home</a>
 	{#if $isLoggedIn}
