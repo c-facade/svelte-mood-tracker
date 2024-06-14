@@ -13,7 +13,7 @@
 </TopAppBar>
 </div>
 
-<TabBar	tabs={routes} let:tab bind:active={$selectedTab} disabled>
+<TabBar	tabs={routes} let:tab bind:active={$selectedTab}>
 	<a href={tab.link} style="text-decoration: none;">
 	<Tab {tab}>
 		<Label>{tab.name}</Label>
