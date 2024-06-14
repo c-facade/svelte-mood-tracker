@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
 import {v4 as uuid } from 'uuid';
 
-
 export interface Activity {
 	id : string;
 	name : string;
@@ -72,3 +71,36 @@ function createActStore(){
 }
 
 export const activities = createActStore();
+
+// ROUTES -------------------------------------
+
+
+export const routes = [
+	{
+		name: 'home',
+		link: '/'
+	},
+	{
+		name: 'diary',
+		link: 'diary'
+	},
+	{
+		name: 'statistics',
+		link: 'stats'
+	},	
+	{
+		name: 'settings',
+		link: 'settings'
+	},
+	
+	{
+		name: 'about',
+		link: 'about'
+	},
+	{
+		name: 'account',
+		link: 'account'
+	}
+];
+
+export const selectedTab = writable(routes[0]);

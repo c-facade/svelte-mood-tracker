@@ -6,6 +6,7 @@
   import { setDoc } from 'firebase/firestore/lite';
 	import {userSettings} from "../../userStore";
 	import { isLoggedIn } from "../../userStore";
+    import {routes, selectedTab} from "../../db";
 	
 	let error : string;
 
@@ -16,6 +17,7 @@
 		userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
 		await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
 		isLoggedIn.set(true);
+		selectedTab.set(routes[0]);
 		await goto('/');
 	} catch (e) {
 			console.log('error in login', e);

@@ -1,0 +1,29 @@
+@use 'sass:color';
+
+@use '@material/theme/color-palette';
+
+$primary: color-palette.$teal-a200;
+
+// Svelte Colors!
+@use '@material/theme/index' as theme with (
+  $primary: $primary,
+  $secondary: color-palette.$teal-300,
+  $surface: #000,
+  $background: #000,
+  $error: color-palette.$red-900
+);
+
+a {
+  color: $primary;
+}
+a:visited {
+  color: color-palette.$teal-200;
+}
+
+body {
+	margin: 0;
+}
+
+.mdc-tab-bar {
+	background-color: black;
+}

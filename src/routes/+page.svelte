@@ -8,6 +8,7 @@
     import {auth} from '../firebase';
 		import { isLoggedIn } from '../userStore'; 
     import {goto} from '$app/navigation';
+    import {routes, selectedTab} from '../db';
 
 
 	onMount(() => {
@@ -15,13 +16,18 @@
 			auth,
 			(user) => {
 				if(user) isLoggedIn.set(true);
+				else{
+					selectedTab.set(routes[5])
+					goto('/account');
+				}
 			}
 		);
-			
+		/*	
 		if(!$isLoggedIn){
 			console.log("not logged in")
 			goto('/account')
 		}
+		*/
 	});
 
 </script>
