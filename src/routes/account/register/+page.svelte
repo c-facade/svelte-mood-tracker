@@ -31,11 +31,6 @@
 </script>
 
 <div>
-	<header>
-		<h4>
-			Sign Up
-		</h4>
-	</header>
 	<div class="form-container">
 		{#if error}
 				<div class="notification-block">

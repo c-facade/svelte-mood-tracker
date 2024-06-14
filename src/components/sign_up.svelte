@@ -48,6 +48,7 @@
 
 	h3 {
 		margin: 10px auto;
+		padding-bottom: 5px;
 	}
 </style>
 
