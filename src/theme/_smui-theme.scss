@@ -2,10 +2,9 @@
 
 @use '@material/theme/color-palette';
 
-$primary: color-palette.$teal-a200;
+$primary: color-palette.$teal-a400;
+$darker-blue-grey: #172329;
 
-
-// Svelte Colors!
 @use '@material/theme/index' as theme with (
   $primary: $primary,
   $secondary: color-palette.$teal-300,
@@ -26,13 +25,30 @@ body {
 }
 
 .mdc-tab-bar {
-	background-color: black;
+	background-color: color-palette.$teal-500;
 }
+
+
+// COME MODIFICARE UN COMPONENTE
+.mdc-tab {
+	--mdc-theme-primary: white;
+}
+
+
+.mdc-tab.active {
+	color: white;
+}
+
+.icon-color .mdc-banner__graphic {
+	color: color-palette.$red-900;
+	background: black;
+}
+
 
 // FORM --------------------
 
 form {
-	background-color: color-palette.$blue-grey-800;
+	background-color: $darker-blue-grey;
 	padding: 30px;
 	margin: 5px auto;
 	max-width: 95%;
@@ -40,4 +56,11 @@ form {
 	flex-direction: column;
 	border-radius: 10px;
 }
+
+form .mdc-button {
+	margin: 10px;
+}
+
+
+
 

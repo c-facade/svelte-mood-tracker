@@ -1,5 +1,8 @@
-<p>Per testare l'applicazione, usa le credenziali "username@gmail.com" e "password".
-</p>
+<script>
+import ErrorBanner from "../../components/ErrorBanner.svelte";
+</script>
+
+<ErrorBanner />
 
 <slot></slot>
 

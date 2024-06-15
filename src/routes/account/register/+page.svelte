@@ -5,7 +5,8 @@
 	import { auth, userDoc } from '../../../firebase';
 	import { setDoc } from 'firebase/firestore/lite';
   import {isLoggedIn, userSettings} from "../../../userStore";
-	let error : string;
+    import {errorMessage, openBanner, routes, selectedTab} from "../../../stores";
+    import getErrorMessage from "$lib/errors";
 
 	async function signUp(event: CustomEvent) {
 		try{
@@ -21,23 +22,22 @@
 			userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
 			// creo un nuovo documento con i dati dell'utente
 			await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
-			await goto('/');
+			selectedTab.set(routes[0]);
+			goto('/');
 			
 			} catch (e) {
+				errorMessage.set(getErrorMessage(e as Error));
 				console.log('Error in creating user', e);
-				error = String(e);
+				openBanner.set(true);
 			}
 		}	
 </script>
 
+<main>
 <div>
 	<div class="form-container">
-		{#if error}
-				<div class="notification-block">
-					<p>{error}</p>
-				</div>
-		{/if}
 		<SignUp on:signup={signUp}/>
-		<p>Already have an account? <a href="/account">Login</a></p>
+		<p style:text-align="center">Already have an account? <a href="/account">Login</a></p>
 	</div>
 </div>
+</main>

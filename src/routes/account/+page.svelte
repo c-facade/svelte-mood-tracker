@@ -6,9 +6,10 @@
   import { setDoc } from 'firebase/firestore/lite';
 	import {userSettings} from "../../userStore";
 	import { isLoggedIn } from "../../userStore";
-    import {routes, selectedTab} from "../../activitiesStore";
-	
-	let error : string;
+  import {routes, selectedTab} from "../../activitiesStore";
+	import { errorMessage } from "../../stores";
+	import getErrorMessage from '$lib/errors';
+	import { openBanner } from "../../stores";
 
 	async function signIn(event : CustomEvent) {
 	try {
@@ -20,8 +21,9 @@
 		selectedTab.set(routes[0]);
 		await goto('/');
 	} catch (e) {
-			console.log('error in login', e);
-			error = String(e);
+		errorMessage.set(getErrorMessage(e as Error));
+		console.log(JSON.stringify(e));
+		openBanner.set(true);
 	}
 }
 	async function logout() {
@@ -37,25 +39,20 @@
 		else $isLoggedIn = false;
 	});
 </script>
+<main>
+	<p>Per testare l'applicazione, usa le credenziali "username@gmail.com" e "password".
+	</p>
 
 {#if $isLoggedIn}
 	<h4>{auth.currentUser ? auth.currentUser.displayName : "error"}</h4>
 	<button on:click={logout} class="danger">Log out</button>
 {:else}
 <div>
-	<header>
-		<h4>
-			Login
-		</h4>
-	</header>
 	<div class="sign-in-form">
-		{#if error}
-			<div class="notification-block">
-				<p>{error}</p>
-			</div>
-		{/if}
 		<SignIn on:login={signIn}/>
-		<p>Don't have an account yet? <a href="/account/register">Sign up</a></p>
+		<p style:text-align="center">Don't have an account yet? <a href="/account/register">Sign up</a></p>
 	</div>
 </div>
 {/if}
+
+</main>

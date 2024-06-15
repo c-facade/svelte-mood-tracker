@@ -1,6 +1,3 @@
-<h1>Mood Tracker</h1>
-<p> Track your mood! </p>
-
 <script lang="ts">
     import {onMount} from 'svelte';
 		import NewEntry from '../components/NewEntry.svelte';
@@ -29,7 +26,12 @@
 
 </script>
 
-<p><b>Nota:</b> i dati che inserisci non sono permanenti, e non vengono caricati sul database.</p>
+<main>
+	
+<h1>Mood Tracker</h1>
+<p> Track your mood! </p>
+
+	<p><b>Nota:</b> i dati che inserisci non sono permanenti, e non vengono caricati sul database.</p>
 
 {#if $isLoggedIn}
 	<NewEntry />
@@ -40,3 +42,5 @@
 {:else}
 	<p><a href="account">Login</a> to use the mood tracker.</p>
 {/if}
+
+</main>

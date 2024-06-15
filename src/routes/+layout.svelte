@@ -9,13 +9,13 @@
 
 
 <TabBar	tabs={routes} let:tab bind:active={$selectedTab}>
-	<a href={tab.link} style="text-decoration: none;">
-	<Tab {tab}>
+	<!--><a href={tab.link} style="text-decoration: none;"></-->
+	<Tab {tab} href={tab.link} minWidth={false}>
 		<Label>{tab.name}</Label>
 	</Tab>
-	</a>
+	<!-->
+	 </a>
+	 </-->
 </TabBar>
 
-<main>
 <slot></slot>
-</main>

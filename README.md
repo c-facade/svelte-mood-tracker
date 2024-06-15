@@ -23,3 +23,7 @@ To do:
 - add collections on firestore
 - Implement server syncronisation.
 - start adding necessary components
+
+### less urgent
+
+- make mobile interface
