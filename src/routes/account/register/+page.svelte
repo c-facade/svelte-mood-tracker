@@ -24,7 +24,7 @@
 			await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
 			selectedTab.set(routes[0]);
 			goto('/');
-			
+		
 			} catch (e) {
 				errorMessage.set(getErrorMessage(e as Error));
 				console.log('Error in creating user', e);

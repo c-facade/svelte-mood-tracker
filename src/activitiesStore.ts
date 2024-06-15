@@ -2,8 +2,10 @@ import { writable } from 'svelte/store';
 import {v4 as uuid } from 'uuid';
 
 export interface Activity {
+	symbol: string | null;
 	id : string;
 	name : string;
+	group: string;
 }
 
 export interface Mood {
@@ -40,26 +42,40 @@ export const moods : Mood[] = [
 	}
 ];
 
+export const defaultActivities : Map<string, string> = new Map([
+	["a", "amare"],
+	["b", "baciare"],
+	["c", "curare"]
+]);
+
+
 function createActStore(){
 	const {subscribe, set, update} = writable<Activity[]>(
 		[
 			{
+				symbol: "directions_walk",
 				id: "awfuo3i4hio",
-				name: "Walk"
+				name: "Walk",
+				group: "default"
 			},
 			{
+				symbol: "voice_selection",
 				id: "034qt8fqw9",
-				name: "Talk"
+				name: "Talk",
+				group: "default"
 			}
 		]
 	);
 
-	const addActivity = (name : string) => {
+	const addActivity = (name : string, symbol :string | null, group: string) => {
 		const newA = {
+			symbol: symbol,
 			id: uuid(),
-			name: name
+			name: name,
+			group: group
 		}
-		update((acts : Activity[]) => [...acts, newA]); 
+		update((acts : Activity[]) => [...acts, newA]);
+		return newA;
 	}
 	
 	return {
@@ -72,35 +88,3 @@ function createActStore(){
 
 export const activities = createActStore();
 
-// ROUTES -------------------------------------
-
-
-export const routes = [
-	{
-		name: 'home',
-		link: '/'
-	},
-	{
-		name: 'diary',
-		link: 'diary'
-	},
-	{
-		name: 'statistics',
-		link: 'stats'
-	},	
-	{
-		name: 'settings',
-		link: 'settings'
-	},
-	
-	{
-		name: 'about',
-		link: 'about'
-	},
-	{
-		name: 'account',
-		link: 'account'
-	}
-];
-
-export const selectedTab = writable(routes[0]);
