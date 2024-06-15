@@ -41,6 +41,6 @@ export const redirectedToLogin = writable(false);
 
 export const errorMessage = writable("Everything OK");
 
-export const openBanner = writable(true);
+export const openBanner = writable(false);
 
 

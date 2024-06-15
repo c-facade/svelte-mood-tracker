@@ -90,10 +90,4 @@
 	<p><a href="account">Login</a> to use the mood tracker.</p>
 {/if}
 
-{#each defaultActivities as [, activity]}
-	<p>{activity}
-	</p>
-{/each}
-
-
 </main>

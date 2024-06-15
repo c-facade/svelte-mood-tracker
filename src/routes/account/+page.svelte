@@ -6,7 +6,7 @@
   import { setDoc } from 'firebase/firestore/lite';
 	import {userSettings} from "../../userStore";
 	import { isLoggedIn } from "../../userStore";
-  import {routes, selectedTab} from "../../activitiesStore";
+  import {routes, selectedTab} from "../../stores";
 	import { errorMessage } from "../../stores";
 	import getErrorMessage from '$lib/errors';
 	import { openBanner } from "../../stores";

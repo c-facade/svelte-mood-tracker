@@ -16,13 +16,18 @@ This application will:
 - Send notifications to remind the user to insert data and view weekly/monthly reports.
 - Work offline and syncronize when it's back online.
 
+- start adding necessary components
 ## Next
 
 To do:
 
 - add collections on firestore
-- Implement server syncronisation.
-- start adding necessary components
+- Implement server synchronisation.
+- add some default activities
+- make add new entry prettier
+- move new activity to component.
+- deal with that synchronisation.
+- deal with groups
 
 ### less urgent
 

@@ -42,11 +42,7 @@ export const moods : Mood[] = [
 	}
 ];
 
-export const defaultActivities : Map<string, string> = new Map([
-	["a", "amare"],
-	["b", "baciare"],
-	["c", "curare"]
-]);
+export const defaultActivities : Map<string, Activity> = new Map([]);
 
 
 function createActStore(){
