@@ -53,7 +53,6 @@ async function getStoredActivities(uid:string) {
 	if(uid == null){
 		throw new Error("not authenticated");
 	}
-	console.log(db);
 	const cRef = collection(db as Firestore, "users", uid, "activities");
 	const snapshot = await getDocs(cRef);
 	if(snapshot.docs.length < 1) {
@@ -84,23 +83,6 @@ async function uploadActivities(initialActivities : Map<string, Activity>){
 
 async function createActStore(){
 	const {subscribe, set, update} = writable<Map<string, Activity>>(defaultActivities);
-	/*
-		[
-			{
-				symbol: "directions_walk",
-				id: "awfuo3i4hio",
-				name: "Walk",
-				group: "default"
-			},
-			{
-				symbol: "voice_selection",
-				id: "034qt8fqw9",
-				name: "Talk",
-				group: "default"
-			}
-		]
-	);
-	 */
 
 	
 	async function downloadActivities(uid : string) {
@@ -138,6 +120,26 @@ async function createActStore(){
 		downloadActivities
 	}
 }
+
+/*
+function createActStore() {
+	const { subscribe, set, update } = writable<Map<string, Activity>>(defaultActivities);
+	
+	const actQuery = (uid) => (collection(db, "users", uid, "activities"));
+	const unsubscribe = onSnapshot(actQuery(uid), (querySnapshot) => {
+		const newData : Map<string, Activity> = new Map();
+		querySnapshot.docs.forEach((doc) =>
+															 {
+			newData.set(doc.id, doc.data() as Activity);
+		}
+		set(newData);
+	}
+
+	const getTodos = async () =>
+		const res = await getDocs(todosQuery(uid));
+		
+}
+*/
 
 export const activities = await createActStore();
 

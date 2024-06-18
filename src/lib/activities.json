@@ -1,0 +1,92 @@
+[
+  [
+    "2adb1d5a-02d4-4e1b-913b-245d3542afd0",
+    {
+      "symbol": "directions_walk",
+      "id": "2adb1d5a-02d4-4e1b-913b-245d3542afd0",
+      "name": "Walk",
+      "group": "default"
+    }
+  ],
+  [
+    "37fbb914-d924-4649-97ba-d4cf3721d4e4",
+    {
+      "symbol": "voice_selection",
+      "id": "37fbb914-d924-4649-97ba-d4cf3721d4e4",
+      "name": "Socialise",
+      "group": "social"
+    }
+  ],
+  [
+    "3553116d-466f-4e4b-85a1-e67099d4a60b",
+    {
+      "symbol": "bedtime",
+      "id": "3553116d-466f-4e4b-85a1-e67099d4a60b",
+      "name": "good sleep",
+      "group": "sleep"
+    }
+  ],
+  [
+    "493d328f-550e-4dda-8a46-ad4baa944f1e",
+    {
+      "symbol": "bedtime",
+      "id": "493d328f-550e-4dda-8a46-ad4baa944f1e",
+      "name": "bad sleep",
+      "group": "sleep"
+    }
+  ],
+  [
+    "8ee239e3-0636-4bd6-8c36-609651181276",
+    {
+      "symbol": "self_improvement",
+      "id": "8ee239e3-0636-4bd6-8c36-609651181276",
+      "name": "meditate",
+      "group": "health"
+    }
+  ],
+  [
+    "b03bc451-7af9-41cb-b60c-dd2ddf17d4e1",
+    {
+      "symbol": "cake",
+      "id": "b03bc451-7af9-41cb-b60c-dd2ddf17d4e1",
+      "name": "party",
+      "group": "social"
+    }
+  ],
+  [
+    "2aa60623-4383-45ad-ba65-fd47dbfc877e",
+    {
+      "symbol": "school",
+      "id": "2aa60623-4383-45ad-ba65-fd47dbfc877e",
+      "name": "school",
+      "group": "school"
+    }
+  ],
+  [
+    "61cfdc99-61b2-4b85-85b5-3f72ca6621b7",
+    {
+      "symbol": "sports_gymnastics",
+      "id": "61cfdc99-61b2-4b85-85b5-3f72ca6621b7",
+      "name": "sport",
+      "group": "health"
+    }
+  ],
+  [
+    "8e48d02c-8805-4f9d-b52c-a39623a9ea52",
+    {
+      "symbol": "trophy",
+      "id": "8e48d02c-8805-4f9d-b52c-a39623a9ea52",
+      "name": "win",
+      "group": "health"
+    }
+  ],
+  [
+    "fbeb46de-adf3-4b4d-b83c-a887d6622b5c",
+    {
+      "symbol": "sprint",
+      "id": "fbeb46de-adf3-4b4d-b83c-a887d6622b5c",
+      "name": "run",
+      "group": "health"
+    }
+  ]
+]
