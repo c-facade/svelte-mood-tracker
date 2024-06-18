@@ -6,17 +6,18 @@
 		import { isLoggedIn } from '../userStore'; 
     import {goto} from '$app/navigation';
 		import {routes, selectedTab, redirectedToLogin} from '../stores';
+		import { activities } from '../activitiesStore';
 		import CircularProgress from '@smui/circular-progress';
-    import {activities, defaultActivities} from '../activitiesStore';
 		import  IconButton  from '@smui/icon-button';
-		import Textfield from '@smui/textfield';
-		import Button from '@smui/button';
 
 	onMount(() => {
 		onAuthStateChanged(
 			auth,
 			(user) => {
-				if(user) isLoggedIn.set(true);
+				if(user){
+					isLoggedIn.set(true);
+					activities.downloadActivities(user.uid);
+				}
 				else if(!$redirectedToLogin){
 					window.setTimeout(()=>{}, 1000);
 					selectedTab.set(routes[5])
@@ -27,24 +28,6 @@
 		);
 	});
 	
-	let name = "";
-	let symbol = "";
-	let group = "";
-
-	function add(){
-		if(name == "") return;
-		const nuova = activities.addActivity(
-			name,
-			symbol === "" ? null : symbol,
-			group === "" ? "default" : group
-		);
-		defaultActivities.set(nuova.id, nuova);
-	}
-	
-	function printList() {
-		console.log([... defaultActivities]);
-		console.log(JSON.stringify([... defaultActivities]));
-	}
 </script>
 
 <main>
@@ -56,29 +39,6 @@
 
 	<IconButton class="material-symbols-outlined">
 	grade</IconButton>
-
-	<h2>New activities!</h2>
-	<div class="form-like">
-	<ul>
-	{#each $activities as activity}
-		<li>
-			<span class="material-symbols-outlined" style:margin="5px">{activity.symbol}</span>&ensp;&emsp;
-			<b>{activity.name}</b>&emsp;group: {activity.group}
-		</li>
-	{/each}
-	</ul>
-	
-	<Textfield type="text" placeholder="insert new activity" bind:value={name} label="name" required>
-	</Textfield>
-	<Textfield type="text" placeholder="insert new activity" bind:value={symbol} label="symbol">
-	</Textfield>
-	<Textfield type="text" placeholder="insert new activity" bind:value={group} label="group">
-	</Textfield>
-
-	<Button on:click={add}>ADD</Button>
-	<Button on:click={printList}>PRINT</Button>
-	</div>
-
 
 {#if $isLoggedIn}
 	<NewEntry />

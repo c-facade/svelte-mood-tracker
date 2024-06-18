@@ -18,5 +18,3 @@ import Button from "@smui/button";
 	 </svelte:fragment>
 </Banner>
 
-<style>
-</style>

@@ -49,7 +49,7 @@ body {
 
 form, .form-like{
 	background-color: $darker-blue-grey;
-	padding: 30px;
+	padding: 10px;
 	margin: 5px auto;
 	max-width: 95%;
 	display: flex;
@@ -61,6 +61,29 @@ form .mdc-button {
 	margin: 10px;
 }
 
+fieldset {
+	border-radius: 10px;
+	border-color: $primary;
+	padding: 20px;
+	margin: 5px;
+}
 
+legend {
+	border-radius: 5px;
+	padding: 5px;
+	color: $primary;
+}
+
+input[type="checkbox"]{
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+
+.mdc-touch-target-wrapper {
+	padding: 5px;
+	background: black;
+	border-radius: 10px;
+}
 
 
