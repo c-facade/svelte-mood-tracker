@@ -1,3 +1,4 @@
+<main>
 <h1>
 	About Mood Tracker
 </h1>
@@ -9,4 +10,4 @@
 <p>
 Its objective is to provide insight on the user's daily moods and what may influence them.
 </p>
-
+</main>

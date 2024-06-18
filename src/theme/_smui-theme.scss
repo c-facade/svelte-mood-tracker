@@ -75,9 +75,7 @@ legend {
 }
 
 input[type="checkbox"]{
-	opacity: 0;
-	height: 0;
-	width: 0;
+	border-radius: 1px;
 }
 
 .mdc-touch-target-wrapper {
@@ -86,4 +84,25 @@ input[type="checkbox"]{
 	border-radius: 10px;
 }
 
+// CHIPS -----------
 
+form .mdc-chip {
+	background-color: transparent;
+	height: auto;
+	border-radius: 50px;
+	padding: 5px;
+	//--mdc-theme-primary: transparent;
+	--mdc-theme-surface: transparent;
+}
+
+
+
+#moods-container .mdc-chip {
+	display: flex;
+	flex-direction: column;
+}
+
+#moods-container .mdc-chip-set {
+	flex-direction: row;
+	justify-content: space-around;
+}

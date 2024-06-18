@@ -20,12 +20,13 @@
 				}
 				else if(!$redirectedToLogin){
 					window.setTimeout(()=>{}, 1000);
-					selectedTab.set(routes[5])
+					selectedTab.set(routes.get('account'))
 					redirectedToLogin.set(true);
 					goto('/account');
 				}
 			}
 		);
+		selectedTab.set(routes.get('home'));
 	});
 	
 </script>
@@ -34,11 +35,6 @@
 	
 <h1>Mood Tracker</h1>
 <p> Track your mood! </p>
-
-	<p><b>Nota:</b> parte dei dati che inserisci sono permanenti.</p>
-
-	<IconButton class="material-symbols-outlined">
-	grade</IconButton>
 
 {#if $isLoggedIn}
 	<NewEntry />

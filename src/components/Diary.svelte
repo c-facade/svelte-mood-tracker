@@ -8,7 +8,6 @@
 	
 	onMount( () => {
 		onAuthStateChanged(auth, () => {
-			console.log($diary);
 			diary.updateFromFirestore();
 			}
 			);

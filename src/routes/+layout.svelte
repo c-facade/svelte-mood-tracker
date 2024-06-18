@@ -8,7 +8,7 @@
 </script>
 
 
-<TabBar	tabs={routes} let:tab bind:active={$selectedTab}>
+<TabBar	tabs={[...routes.values()]} let:tab bind:active={$selectedTab}>
 	<!--><a href={tab.link} style="text-decoration: none;"></-->
 	<Tab {tab} href={tab.link} minWidth={false}>
 		<Label>{tab.name}</Label>

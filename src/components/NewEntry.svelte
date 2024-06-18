@@ -6,19 +6,22 @@
 	import Button from '@smui/button';
 	import MenuSurface from '@smui/menu-surface';
     import NewActivity from './NewActivity.svelte';
+		import IconButton, {Icon} from '@smui/icon-button';
+		import Chip, { Set, Text} from '@smui/chips';
 
 	function addEntry(e : SubmitEvent){
 		console.log("Adding");
 		let form = e.target as HTMLFormElement;
 		const formData = new FormData(form);
 		var entries : Entry[] = [];
-		let mood = formData.get("mood");
-		const date = new Date();
+		let mood = chosen; 
+		/*formData.get("mood");
 		if(mood === null){
 			alert("You need to say how you feel.");
 			return;
 		}
 		formData.delete("mood");
+		*/
 		entries.push(
 		{
 			activityName: 'mood',
@@ -34,6 +37,7 @@
 			});
 		}
 		console.log(entries);
+		const date = new Date();
 		const page : DiaryPage = {entries, date};
 		diary.addPage(page);
 	}
@@ -47,17 +51,26 @@
 
 	let surface: MenuSurface;
 	let anchor: HTMLDivElement;
+	let chosen = "";
 </script>
 
 <form on:submit|preventDefault={addEntry}>
 	<fieldset>
 		<legend>How are you today?</legend>
-		{#each moods as mood}
+		<!-->{#each moods as mood}
 		<p>
 			<input type="radio" name="mood" id="mood-{mood.value}" value={mood.value} />
 			<label for="mood-{mood.value}">{mood.name}</label>
 			<p>
 		{/each}
+		</-->
+		<div id="moods-container">
+		<Set chips={moods} let:chip choice bind:selected={chosen}>
+			<Chip {chip} touch>
+				<span class="material-symbols-outlined">{chip.symbol}</span><span>{chip.name}</span>
+			</Chip>
+		</Set>
+		</div>
 	</fieldset>
 	
 	<fieldset>
@@ -82,7 +95,6 @@
 				</div>
 			{/each}
 		</div>
-	</fieldset>
 	<div class="open-menu-button mdc-menu-surface--anchor" bind:this={anchor}>
 		<Button on:click$preventDefault={() =>
 					surface.setOpen(true)
@@ -93,6 +105,13 @@
 	<NewActivity surface={surface}/>
 </MenuSurface>
 	</div>
-	<button type="submit">OK</button>
+	</fieldset>
+	<Button variant="raised">OK</Button>
 </form>
+
+<style>
+	#moods-container .material-symbols-outlined {
+		font-size:60px;
+	}
+</style>
 

@@ -16,6 +16,7 @@
 			group === "" ? "default" : group
 		);
 		defaultActivities.set(nuova.id, nuova);
+		surface.setOpen(false);
 	}
 	
 	function printList() {

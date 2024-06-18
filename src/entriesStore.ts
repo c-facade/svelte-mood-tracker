@@ -24,8 +24,6 @@ async function getStoredEntries() {
 				entries: e.data().entries
 			} as DiaryPage)
 																									);
-			//(e.data() as DiaryPage));
-		console.log(stored);
 		return stored;
 	}
 	else{
