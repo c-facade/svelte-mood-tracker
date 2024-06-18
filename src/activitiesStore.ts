@@ -94,11 +94,11 @@ async function uploadActivities(initialActivities : Map<string, Activity>, uid :
 }
 
 
-async function createActStore(){
+function createActStore(){
 	const {subscribe, set, update} = writable<Map<string, Activity>>(defaultActivities);
 
 	
-	async function downloadActivities(uid : string) {
+	const downloadActivities = async (uid : string) => {
 		try{
 			const stored = await getStoredActivities(uid);
 			if(stored == null){
@@ -129,8 +129,8 @@ async function createActStore(){
 		subscribe,
 		set,
 		update,
-		addActivity,
-		downloadActivities
+		downloadActivities,
+		addActivity
 	}
 }
 

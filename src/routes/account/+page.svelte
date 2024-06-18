@@ -18,7 +18,7 @@
 		userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
 		await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
 		isLoggedIn.set(true);
-		selectedTab.set(routes[0]);
+		selectedTab.set(routes.get('home'));
 		await goto('/');
 	} catch (e) {
 		errorMessage.set(getErrorMessage(e as Error));

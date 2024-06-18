@@ -43,7 +43,7 @@ async function uploadPage(page : DiaryPage){
 	}
 }
 
-async function createDiary(){
+function createDiary(){
 	const {subscribe, set, update} = writable<DiaryPage[]>([]);
 
 	const addPage = (page : DiaryPage) => {
@@ -51,7 +51,7 @@ async function createDiary(){
 		uploadPage(page);
 	}
 	
-	async function updateFromFirestore(){
+	const updateFromFirestore = async () => {
 		try{
 			set(await getStoredEntries());
 		}

@@ -8,7 +8,6 @@
 		import {routes, selectedTab, redirectedToLogin} from '../stores';
 		import { activities } from '../activitiesStore';
 		import CircularProgress from '@smui/circular-progress';
-		import  IconButton  from '@smui/icon-button';
 
 	onMount(() => {
 		onAuthStateChanged(
