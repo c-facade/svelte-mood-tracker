@@ -154,7 +154,7 @@ function createActStore() {
 }
 */
 
-export const activities = await createActStore();
+export const activities = createActStore();
 
 function createGroups(acts: Map<string, Activity>) {
 	const groups : Map<string, string[]> = new Map();

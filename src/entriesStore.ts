@@ -70,4 +70,4 @@ async function createDiary(){
 	}
 }
 
-export const diary = await createDiary();
+export const diary = createDiary();

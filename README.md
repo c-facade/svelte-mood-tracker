@@ -16,18 +16,23 @@ This application will:
 - Send notifications to remind the user to insert data and view weekly/monthly reports.
 - Work offline and syncronize when it's back online.
 
-- start adding necessary components
 ## Next
 
 To do:
 
-- add collections on firestore
-- Implement server synchronisation.
-- add some default activities
-- make add new entry prettier
-- move new activity to component.
-- deal with that synchronisation.
-- deal with groups
+- add more default activities
+- add functionalities such as:
+	- add to group
+	- edit group
+	- edit activity
+	- deal with emoticons
+	- delete activity
+- make diary prettier
+- make the app progressive
+- statistics and settings
+- don't load all diary pages at one time?
+- notifications
+- minimal phone optimisation
 
 ### less urgent
 
