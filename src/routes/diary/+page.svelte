@@ -6,6 +6,6 @@
 <h1>
 	This is your diary
 </h1>
-</main>
 
 <Diary />
+</main>

@@ -1,7 +1,18 @@
 <script lang="ts">
+    import {onMount} from 'svelte';
 	import {moods} from '../db';
 	import type { Mood } from '../db';
 	import { diary } from '../entriesStore';
+    import {onAuthStateChanged} from 'firebase/auth';
+	import { auth } from '../firebase';
+	
+	onMount( () => {
+		onAuthStateChanged(auth, () => {
+			console.log($diary);
+			diary.updateFromFirestore();
+			}
+			);
+	});
 	
 	const getMood = (value : number | boolean) => {
 		if( typeof value == 'boolean') return 'error';

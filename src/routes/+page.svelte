@@ -35,7 +35,7 @@
 <h1>Mood Tracker</h1>
 <p> Track your mood! </p>
 
-	<p><b>Nota:</b> i dati che inserisci non sono permanenti, e non vengono caricati sul database.</p>
+	<p><b>Nota:</b> parte dei dati che inserisci sono permanenti.</p>
 
 	<IconButton class="material-symbols-outlined">
 	grade</IconButton>

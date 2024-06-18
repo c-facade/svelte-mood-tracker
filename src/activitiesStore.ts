@@ -17,33 +17,45 @@ export interface Mood {
 	id : number;
 	name : string;
 	value: number;
+	symbol: string;
+	color: string;
 }
 
 export const moods : Mood[] = [ 
 	{
 		id: 1,
 		name: 'great', 
-		value: 5
+		value: 5,
+		symbol: 'sentiment_very_satisfied',
+		color: 'green'
 	},
 	{
 		id: 2,
 		name: 'good',
-		value: 4
+		value: 4,
+		symbol: 'sentiment_satisfied',
+		color: 'teal'
 	},
 	{
 		id: 3,
 		name: 'okay',
 		value: 3,
+		symbol: 'sentiment_satisfied',
+		color: 'blue',
 	},
 	{
 		id: 2,
 		name: 'not so good',
 		value: 2,
+		symbol: 'sentiment_dissatisfied',
+		color: 'purple'
 	},
 	{
 		id: 1,
 		name: 'bad',
-		value: 1
+		value: 1,
+		symbol: 'sentiment_very_dissatisfied',
+		color: 'red'
 	}
 ];
 
@@ -74,9 +86,10 @@ async function storeNewActivity(a : Activity){
 		}
 }
 
-async function uploadActivities(initialActivities : Map<string, Activity>){
+async function uploadActivities(initialActivities : Map<string, Activity>, uid : string){
+	if(uid == null) throw new Error("not authorised");
 	for(const a of initialActivities.values()){
-		storeNewActivity(a);
+		await setDoc(doc(db, "users", uid, "activities", a.id), a);
 	}
 }
 
@@ -89,7 +102,7 @@ async function createActStore(){
 		try{
 			const stored = await getStoredActivities(uid);
 			if(stored == null){
-				uploadActivities(defaultActivities);
+				uploadActivities(defaultActivities, uid);
 			}
 			else{
 				set(stored);

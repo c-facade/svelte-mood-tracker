@@ -2,8 +2,10 @@
 	import { moods, activities, groups, type Activity } from '../activitiesStore';
 	import { diary } from '../entriesStore';
 	import type { Entry, DiaryPage } from '../entriesStore';
-  import NewActivity from './NewActivity.svelte';
 	import Wrapper from '@smui/touch-target';
+	import Button from '@smui/button';
+	import MenuSurface from '@smui/menu-surface';
+    import NewActivity from './NewActivity.svelte';
 
 	function addEntry(e : SubmitEvent){
 		console.log("Adding");
@@ -11,7 +13,7 @@
 		const formData = new FormData(form);
 		var entries : Entry[] = [];
 		let mood = formData.get("mood");
-		const date = new Date()
+		const date = new Date();
 		if(mood === null){
 			alert("You need to say how you feel.");
 			return;
@@ -42,6 +44,9 @@
 		symbol: null,
 		group: "default"
 	};
+
+	let surface: MenuSurface;
+	let anchor: HTMLDivElement;
 </script>
 
 <form on:submit|preventDefault={addEntry}>
@@ -77,23 +82,17 @@
 				</div>
 			{/each}
 		</div>
-		<!-->
-		{#each $activities as [, activity]}
-			<Wrapper>
-				<input type="checkbox" name={activity.name} id={activity.id} value={activity.id} />
-				<label for={activity.id}><span class="material-symbols-outlined">{activity.symbol}</span>&ensp;{activity.name}</label>
-			</Wrapper>
-		{/each}
-		</-->
-		<!-->
-		{#each $activities as [, activity]}
-			<input type="checkbox" name={activity.name} id={activity.id} value={activity.id} />
-			<label for={activity.id}>{activity.name}</label><br/>
-		{/each}
-		</-->
-		<NewActivity/>
 	</fieldset>
-
+	<div class="open-menu-button mdc-menu-surface--anchor" bind:this={anchor}>
+		<Button on:click$preventDefault={() =>
+					surface.setOpen(true)
+					}
+		>Add Activity
+	</Button>
+<MenuSurface bind:this={surface} anchor={false} bind:anchorElement={anchor}>
+	<NewActivity surface={surface}/>
+</MenuSurface>
+	</div>
 	<button type="submit">OK</button>
 </form>
 

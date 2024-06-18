@@ -2,6 +2,8 @@
     import {activities, defaultActivities } from '../activitiesStore';
 		import Textfield from '@smui/textfield';
 		import Button from '@smui/button';
+		import MenuSurface from '@smui/menu-surface';
+
 	let name = "";
 	let symbol = "";
 	let group = "";
@@ -20,10 +22,12 @@
 		console.log([... defaultActivities]);
 		console.log(JSON.stringify([... defaultActivities]));
 	}
+
+	export let surface: MenuSurface;
 </script>
 
-<div class="form-like">
-	<h2>New activities!</h2>
+<form on:submit|preventDefault>
+	<!-->
 	<ul>
 		{#each $activities as [, activity]}
 		<li>
@@ -32,7 +36,7 @@
 		</li>
 	{/each}
 	</ul>
-	
+	</-->
 	<Textfield type="text" placeholder="insert new activity" bind:value={name} label="name" required>
 	</Textfield>
 	<Textfield type="text" placeholder="insert new activity" bind:value={symbol} label="symbol">
@@ -40,7 +44,8 @@
 	<Textfield type="text" placeholder="insert new activity" bind:value={group} label="group">
 	</Textfield>
 
-	<Button on:click={add}>ADD</Button>
-	<Button on:click={printList}>PRINT</Button>
-	</div>
+	<Button on:click={add} >ADD</Button>
+  <Button on:click={printList} >PRINT</Button>
+	<Button on:click={() => surface.setOpen(false)}>Cancel</Button>
+</form>
 
