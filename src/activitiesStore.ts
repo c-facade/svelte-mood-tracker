@@ -106,6 +106,7 @@ function createActStore(){
 			}
 			else{
 				set(stored);
+				groups.load(stored);
 			}
 		}
 		catch(e){
@@ -134,44 +135,29 @@ function createActStore(){
 	}
 }
 
-/*
-function createActStore() {
-	const { subscribe, set, update } = writable<Map<string, Activity>>(defaultActivities);
-	
-	const actQuery = (uid) => (collection(db, "users", uid, "activities"));
-	const unsubscribe = onSnapshot(actQuery(uid), (querySnapshot) => {
-		const newData : Map<string, Activity> = new Map();
-		querySnapshot.docs.forEach((doc) =>
-															 {
-			newData.set(doc.id, doc.data() as Activity);
-		}
-		set(newData);
-	}
-
-	const getTodos = async () =>
-		const res = await getDocs(todosQuery(uid));
-		
-}
-*/
 
 export const activities = createActStore();
 
-function createGroups(acts: Map<string, Activity>) {
+function createGroups() {
 	const groups : Map<string, string[]> = new Map();
-	for(const a of acts.values())
-		{
-			const list : string[] | undefined = groups.get(a.group);
-			if(list !== undefined){
-				groups.set(a.group, [...list, a.id]);
-			}
-			else{
-				groups.set(a.group, [a.id]);
-			}
-	}
-	console.log(groups);
 
 	const { subscribe, set, update } = writable(groups);
 	
+	const load = (acts: Map<string, Activity>) => {
+		const newGroups : Map<string, string[]> = new Map();	
+		for(const a of acts.values())
+			{
+				const list : string[] | undefined = groups.get(a.group);
+				if(list !== undefined){
+					newGroups.set(a.group, [...list, a.id]);
+				}
+				else{
+					newGroups.set(a.group, [a.id]);
+				}
+			}
+			set(newGroups);
+	}
+
 	const addActivity = (group: string, id: string) => {
 		update((groups) => {
 			const list : string[] | undefined = groups.get(group);
@@ -190,9 +176,10 @@ function createGroups(acts: Map<string, Activity>) {
 		subscribe,
 		set,
 		update,
-		addActivity
+		addActivity,
+		load
 	}
 }
 
-export const groups = createGroups(defaultActivities);
+export const groups = createGroups();
 
