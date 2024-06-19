@@ -17,9 +17,9 @@
 - implementare lo storage permanente (magari non preoccupandosi della sincronizzazione?)
 - poi iniziare a fare il logo
 - la struttura dati dei settings sarà anche quella degli utenti
-- sottocollezioni con entries e activities. decidere bene le strutture dati perchè poi son cazzi
 
 ### opzionale
 
 - creare grafiche ottimizzate per il telefono.
+
 

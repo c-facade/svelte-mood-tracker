@@ -16,13 +16,13 @@
 		let user = await signInWithEmailAndPassword(auth, event.detail.email, event.detail.password);
 		await updateProfile(user.user, { displayName: event.detail.username });
 		userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
-		await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
+		//await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
 		isLoggedIn.set(true);
 		selectedTab.set(routes.get('home'));
 		await goto('/');
 	} catch (e) {
 		errorMessage.set(getErrorMessage(e as Error));
-		console.log(JSON.stringify(e));
+		console.log(e);
 		openBanner.set(true);
 	}
 }

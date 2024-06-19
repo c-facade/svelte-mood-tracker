@@ -3,7 +3,7 @@
 	import SignUp from "../../../components/sign_up.svelte";
 	import { goto } from "$app/navigation";
 	import { auth, userDoc } from '../../../firebase';
-	import { setDoc } from 'firebase/firestore/lite';
+	import { setDoc } from 'firebase/firestore';
   import {isLoggedIn, userSettings} from "../../../userStore";
     import {errorMessage, openBanner, routes, selectedTab} from "../../../stores";
     import getErrorMessage from "$lib/errors";
