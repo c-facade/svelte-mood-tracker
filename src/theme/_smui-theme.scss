@@ -3,11 +3,16 @@
 @use '@material/theme/color-palette';
 
 $primary: color-palette.$teal-a400;
+$primary-unsaturated: color-palette.$teal-500;
+$primary-light: color-palette.$teal-100;
 $darker-blue-grey: #172329;
+$secondary: color-palette.$purple-300;
+$secondary-light: color-palette.$purple-100;
+$error: color-palette.$red-300;
 
 @use '@material/theme/index' as theme with (
   $primary: $primary,
-  $secondary: color-palette.$teal-300,
+  $secondary: $secondary,
   $surface: #000,
   $background: #000,
   $error: color-palette.$red-900
@@ -46,6 +51,30 @@ body {
 .icon-color .mdc-banner__graphic {
 	color: color-palette.$red-900;
 	background: black;
+}
+
+// SMALL BUTTONS ----------
+
+.simple-button {
+	background-color: transparent;
+	color: white;
+	border: transparent;
+	border-radius: 20px;
+}
+
+.simple-button:hover {
+	background-color: darkgrey;
+}
+
+.material-symbols-outlined {
+	display: inline-flex;
+	vertical-align: bottom;
+}
+
+// BIG BUTTONS ---------------
+
+button.red {
+	--mdc-theme-primary: #EF5350;
 }
 
 
@@ -88,6 +117,10 @@ input[type="checkbox"]{
 	border-radius: 10px;
 }
 
+.activities-container .mdc-text-field {
+	height: 30px;
+}
+
 // CHIPS -----------
 
 form .mdc-chip {
@@ -109,3 +142,35 @@ form .mdc-chip {
 	flex-direction: row;
 	justify-content: space-around;
 }
+
+// DIARY STYLES ----------------------
+
+h2.mood {
+	color: white;
+	text-transform: capitalize;
+}
+
+.diary-date {
+	color: $primary-light;
+	margin-bottom: 0;
+}
+
+.diary-page .entry {
+	background-color: black;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 20px;
+}
+
+.diary-page {
+	background-color: $darker-blue-grey;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 5px;
+}
+
+.entries-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+

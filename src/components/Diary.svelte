@@ -5,7 +5,9 @@
 	import { diary } from '../entriesStore';
     import {onAuthStateChanged} from 'firebase/auth';
 	import { auth } from '../firebase';
-	
+
+	// TODO style uppercase and or add symbols
+
 	onMount( () => {
 		onAuthStateChanged(auth, () => {
 			diary.updateFromFirestore();
@@ -22,14 +24,25 @@
 </script>
 
 {#each $diary as diarypage}
-	<h3>{diarypage.date.toLocaleDateString()}</h3>
-	{#each diarypage.entries as entry}
-		{#if entry.activityName == 'mood'}
-			<h2 class="mood">{getMood(entry.value)}</h2>
-		{:else}
-			<p class="entry">{entry.activityName}</p>
+	<div class="diary-page">	
+		<h3 class="diary-date">{diarypage.date.toLocaleDateString()}</h3>
+		{#if diarypage.entries[0].activityName == 'mood'}
+			<h2 class="mood">{getMood(diarypage.entries[0].value)}</h2>
 		{/if}
-	{/each}
+		<div class="entries-container">
+			{#each diarypage.entries.slice(1) as entry}
+				{#if entry.activityName == 'mood'}
+					<h2 class="mood">{getMood(entry.value)}</h2>
+				{:else}
+					<p class="entry">{entry.activityName}</p>
+				{/if}
+			{/each}
+		</div>
+	</div>
 {:else}
 	Your entries will be shown here
 {/each}
+
+
+<style>
+</style>

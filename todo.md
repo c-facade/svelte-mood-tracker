@@ -23,3 +23,15 @@
 - creare grafiche ottimizzate per il telefono.
 
 
+## DA FARE ANCORA
+
+- migliorare tab bar
+- header con titolo?
+- cambiare titolo html
+- mettere emoticons nel diario
+- migliorare il touch target dei wrapper
+- nuovo gruppo
+- statistiche
+- togliere i settings se proprio non ne abbiamo
+- mettere i padding giusti per il cellulare
+- mettere la barra di caricamento su diario

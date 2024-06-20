@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import {v4 as uuid } from 'uuid';
 import JSON from '$lib/activities.json' assert {type: 'json'};
 import { auth, db } from './firebase'
@@ -11,6 +11,7 @@ export interface Activity {
 	id : string;
 	name : string;
 	group: string;
+	archived: boolean;
 }
 
 export interface Mood {
@@ -66,7 +67,7 @@ export const moods : Mood[] = [
 
 export const defaultActivities : Map<string, Activity> = new Map(defaultJSON);
 
-async function getStoredActivities(uid:string) {
+async function getStoredActivities(uid:string | null) {
 	if(uid == null){
 		throw new Error("not authenticated");
 	}
@@ -82,10 +83,10 @@ async function getStoredActivities(uid:string) {
 	return stored;
 }
 
-async function storeNewActivity(a : Activity){
-	if(auth.currentUser)
+async function storeActivity(a : Activity, uid: string | null){
+	if(uid == null) throw new Error("not authenticated");
 		try{
-			await setDoc(doc(db, "users", auth.currentUser.uid, "activities", a.id), a);
+			setDoc(doc(db, "users", uid, "activities", a.id), a);
 		} catch (e) {
 			console.log(e);
 		}
@@ -110,12 +111,11 @@ function createActStore(){
 			const stored = await getStoredActivities(uid);
 			if(stored == null){
 				uploadActivities(defaultActivities, uid);
-				groups.load(defaultActivities);
 			}
 			else{
 				set(stored);
-				groups.load(stored);
 			}
+			groups.load()
 		}
 		catch(e){
 			console.log(e);
@@ -126,30 +126,76 @@ function createActStore(){
 	const addActivity = (name : string, symbol :string | null, group: string) => {
 		const id = uuid();
 		const newA = {
-			symbol, name, id, group
+			symbol, name, id, group, archived: false
 		}
 		update((acts : Map<string, Activity>) => acts.set(id, newA));
 		groups.addActivity(group, id);
-		storeNewActivity(newA);
+		if(auth!.currentUser){
+			storeActivity(newA, auth.currentUser.uid);
+		}
 		return newA;
 	}
+
+	const updateWith = async (temporary : Activity[]) => {
+		const uid = (auth!.currentUser) ? auth!.currentUser.uid : null;
+		const stored = await getStoredActivities(uid);
+		if(stored) set(stored);
+		for(const a of temporary){
+			if(a.id == ""){
+				a.id = uuid();
+			}
+			update((acts: Map<string, Activity>) => acts.set(a.id, a));
+			storeActivity(a, uid);
+		}
+		groups.load();		
+	}
+
+	const deleteGroup = (group : string) => {
+		update((acts: Map<string, Activity>) => {
+			for( const a of acts.values()){
+				if(a.group == group){
+					a.archived = true;
+				}
+			}
+			groups.load();
+			return acts;
+		});
+	}
+
+
 	
 	return {
 		subscribe,
 		set,
 		update,
 		downloadActivities,
-		addActivity
+		addActivity,
+		updateWith, 
+		deleteGroup
 	}
 }
 
 export const activities = createActStore();
 
+export function cloneActivity(a: Activity | undefined){
+	if(a == undefined) return null;
+	const newA : Activity= {
+		symbol: a.symbol,
+		id: a.id,
+		name: a.name,
+		group: a.group,
+		archived: false
+	}
+	return newA;
+}
+		
+
 function createGroups() {
 	const groups : Map<string, string[]> = new Map();
 
 	const { subscribe, set, update } = writable(groups);
-	
+
+	/*
 	const load = (acts: Map<string, Activity>) => {
 		const newGroups : Map<string, string[]> = new Map();
 		for(const a of acts.values())
@@ -163,7 +209,24 @@ function createGroups() {
 				}
 			}
 		set(newGroups);
-	}
+		}
+	 */
+	const load = () => {
+		const newGroups : Map<string, string[]> = new Map();
+		const acts = get(activities);
+		for(const a of acts.values())
+			{
+				if(a.archived) continue;
+				const list : string[] | undefined = newGroups.get(a.group);
+				if(list !== undefined){
+					newGroups.set(a.group, [...list, a.id]);
+				}
+				else{
+					newGroups.set(a.group, [a.id]);
+				}
+			}
+		set(newGroups);
+		}
 
 	const addActivity = (group: string, id: string) => {
 		update((groups) => {

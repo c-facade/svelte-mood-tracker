@@ -7,9 +7,9 @@
 	import Button from '@smui/button';
 	import MenuSurface from '@smui/menu-surface';
     import NewActivity from './NewActivity.svelte';
-		import IconButton from '@smui/icon-button';
 		import Chip, { Set } from '@smui/chips';
 		import EditGroup from './EditGroup.svelte';
+		import DeleteGroup from './DeleteGroup.svelte';
 
 	function addEntry(e : SubmitEvent){
 		console.log("Adding");
@@ -49,7 +49,8 @@
 		id: 'zero',
 		name: "error",
 		symbol: null,
-		group: "default"
+		group: "default",
+		archived: false
 	};
 
 	let surface: MenuSurface;
@@ -60,13 +61,6 @@
 <form on:submit|preventDefault={addEntry}>
 	<fieldset>
 		<legend>How are you today?</legend>
-		<!-->{#each moods as mood}
-		<p>
-			<input type="radio" name="mood" id="mood-{mood.value}" value={mood.value} />
-			<label for="mood-{mood.value}">{mood.name}</label>
-			<p>
-		{/each}
-		</-->
 		<div id="moods-container">
 		<Set chips={moods} let:chip choice bind:selected={chosen}>
 			<Chip {chip} touch>
@@ -84,10 +78,8 @@
 					<div class="group-row">
 						<h4>{name}</h4>
 						<div class="buttons-container">
-							<IconButton class="material-symbols-outlined" on:click$preventDefault>add</IconButton>
-								<EditGroup {list} {name} {errorActivity}/>	
-							<IconButton class="material-symbols-outlined" on:click$preventDefault>edit</IconButton>
-								<IconButton class="material-symbols-outlined" on:click$preventDefault>delete</IconButton>
+							<EditGroup {list} {name} {errorActivity}/>
+							<DeleteGroup {name}/>
 						</div>
 					</div>
 					<div class="activities-container">
