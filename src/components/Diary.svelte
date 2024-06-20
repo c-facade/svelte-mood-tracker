@@ -25,8 +25,6 @@
 
 </script>
 
-{$isLoggedIn}
-
 {#each $diary as diarypage}
 	<div class="diary-page">	
 		<h3 class="diary-date">{diarypage.date.toLocaleDateString()}</h3>

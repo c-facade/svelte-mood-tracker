@@ -3,7 +3,6 @@
 	import { diary } from '../entriesStore';
 	import type { Entry, DiaryPage } from '../entriesStore';
 	import type { Mood } from '../activitiesStore';
-	import Wrapper from '@smui/touch-target';
 	import Button from '@smui/button';
 	import MenuSurface from '@smui/menu-surface';
     import NewActivity from './NewActivity.svelte';
@@ -84,7 +83,7 @@
 					</div>
 					<div class="activities-container">
 						{#each list.map((id) => ($activities.get(id) ?? errorActivity )) as a}
-							<Wrapper>
+							<div class="activity-box">
 								<input type="checkbox" name={a.name} id={a.id} value={a.id}>
 								<label for={a.id}>
 									{#if a.symbol}
@@ -92,7 +91,7 @@
 									{/if}
 									&ensp;{a.name}
 								</label>
-							</Wrapper>
+							</div>
 						{/each}
 					</div>
 				</div>

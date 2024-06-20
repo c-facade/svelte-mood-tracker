@@ -158,6 +158,7 @@ function createActStore(){
 				}
 			}
 			groups.load();
+			if(auth!.currentUser) uploadActivities(acts, auth.currentUser.uid);
 			return acts;
 		});
 	}
