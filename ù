@@ -9,10 +9,11 @@
 	import { isLoggedIn } from '../userStore';
 
 	// TODO style uppercase and or add symbols
-	
+
 	onMount( () => {
 		onAuthStateChanged(auth, (user) => {
 			diary.updateFromFirestore();
+			if(user) isLoggedIn.set(true);
 			}
 			);
 	});
@@ -25,8 +26,7 @@
 
 </script>
 
-{$isLoggedIn}
-
+{#if $isLoggedIn}
 {#each $diary as diarypage}
 	<div class="diary-page">	
 		<h3 class="diary-date">{diarypage.date.toLocaleDateString()}</h3>
@@ -44,12 +44,12 @@
 		</div>
 	</div>
 {:else}
-	{#if $isLoggedIn}
 	Your entries will be shown here
-	{:else}
-		<LinearProgress indeterminate />
-	{/if}
 {/each}
+{:else}
+	<LinearProgress indeterminate />
+{/if}
+
 
 <style>
 </style>
