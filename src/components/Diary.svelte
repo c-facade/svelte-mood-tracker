@@ -5,13 +5,13 @@
 	import { diary } from '../entriesStore';
     import {onAuthStateChanged} from 'firebase/auth';
 	import { auth } from '../firebase';
-	import LinearProgress from '@smui/linear-progess'
+	import LinearProgress from '@smui/linear-progress'
 	import { isLoggedIn } from '../userStore';
 
 	// TODO style uppercase and or add symbols
 	
 	onMount( () => {
-		onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, () => {
 			diary.updateFromFirestore();
 			}
 			);
