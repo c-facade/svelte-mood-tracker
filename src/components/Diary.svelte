@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onMount} from 'svelte';
-	import {moods} from '../db';
-	import type { Mood } from '../db';
+	import {moods} from '../activitiesStore';
+	import type { Mood } from '../activitiesStore';
 	import { diary } from '../entriesStore';
     import {onAuthStateChanged} from 'firebase/auth';
 	import { auth } from '../firebase';

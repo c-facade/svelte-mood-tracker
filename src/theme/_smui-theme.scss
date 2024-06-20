@@ -13,6 +13,8 @@ $darker-blue-grey: #172329;
   $error: color-palette.$red-900
 );
 
+// FONT ------------------------
+
 a {
   color: $primary;
 }
@@ -22,6 +24,8 @@ a:visited {
 
 body {
 	margin: 0;
+	font-family: "Open Sans", sans-serif;
+	font-optical-sizing: auto;
 }
 
 .mdc-tab-bar {

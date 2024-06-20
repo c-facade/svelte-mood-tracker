@@ -2,19 +2,22 @@
 	import { moods, activities, groups, type Activity } from '../activitiesStore';
 	import { diary } from '../entriesStore';
 	import type { Entry, DiaryPage } from '../entriesStore';
+	import type { Mood } from '../activitiesStore';
 	import Wrapper from '@smui/touch-target';
 	import Button from '@smui/button';
 	import MenuSurface from '@smui/menu-surface';
     import NewActivity from './NewActivity.svelte';
-		import IconButton, {Icon} from '@smui/icon-button';
-		import Chip, { Set, Text} from '@smui/chips';
+		import IconButton from '@smui/icon-button';
+		import Chip, { Set } from '@smui/chips';
+		import EditGroup from './EditGroup.svelte';
 
 	function addEntry(e : SubmitEvent){
 		console.log("Adding");
 		let form = e.target as HTMLFormElement;
 		const formData = new FormData(form);
 		var entries : Entry[] = [];
-		let mood = chosen; 
+		if(!chosen) alert("You need to say how you feel.");
+		let mood = chosen.value; 
 		/*formData.get("mood");
 		if(mood === null){
 			alert("You need to say how you feel.");
@@ -51,7 +54,7 @@
 
 	let surface: MenuSurface;
 	let anchor: HTMLDivElement;
-	let chosen = "";
+	let chosen : Mood;
 </script>
 
 <form on:submit|preventDefault={addEntry}>
@@ -78,7 +81,15 @@
 		<div class="groups-container">
 			{#each $groups as [name, list]}
 				<div class="group">
-					<h4>{name}</h4>
+					<div class="group-row">
+						<h4>{name}</h4>
+						<div class="buttons-container">
+							<IconButton class="material-symbols-outlined" on:click$preventDefault>add</IconButton>
+								<EditGroup {list} {name} {errorActivity}/>	
+							<IconButton class="material-symbols-outlined" on:click$preventDefault>edit</IconButton>
+								<IconButton class="material-symbols-outlined" on:click$preventDefault>delete</IconButton>
+						</div>
+					</div>
 					<div class="activities-container">
 						{#each list.map((id) => ($activities.get(id) ?? errorActivity )) as a}
 							<Wrapper>
@@ -112,6 +123,12 @@
 <style>
 	#moods-container .material-symbols-outlined {
 		font-size:60px;
+	}
+
+	.group-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 </style>
 

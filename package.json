@@ -14,11 +14,13 @@
 		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
 	},
 	"devDependencies": {
+		"@material/typography": "^14.0.0",
 		"@mdi/js": "^7.4.47",
 		"@smui/banner": "^7.0.0",
 		"@smui/button": "^7.0.0",
 		"@smui/chips": "^7.0.0",
 		"@smui/common": "^7.0.0",
+		"@smui/dialog": "^7.0.0",
 		"@smui/icon-button": "^7.0.0",
 		"@smui/menu-surface": "^7.0.0",
 		"@smui/textfield": "^7.0.0",

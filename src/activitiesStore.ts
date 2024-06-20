@@ -21,6 +21,8 @@ export interface Mood {
 	color: string;
 }
 
+// MOODS ---------------------------------------------------------
+
 export const moods : Mood[] = [ 
 	{
 		id: 1,
@@ -59,6 +61,9 @@ export const moods : Mood[] = [
 	}
 ];
 
+
+// ACTIVITIES SYNC ------------------------------------------
+
 export const defaultActivities : Map<string, Activity> = new Map(defaultJSON);
 
 async function getStoredActivities(uid:string) {
@@ -94,6 +99,8 @@ async function uploadActivities(initialActivities : Map<string, Activity>, uid :
 }
 
 
+// ACTIVITIES STORE -----------------------------------------------
+
 function createActStore(){
 	const {subscribe, set, update} = writable<Map<string, Activity>>(defaultActivities);
 
@@ -103,6 +110,7 @@ function createActStore(){
 			const stored = await getStoredActivities(uid);
 			if(stored == null){
 				uploadActivities(defaultActivities, uid);
+				groups.load(defaultActivities);
 			}
 			else{
 				set(stored);
@@ -135,7 +143,6 @@ function createActStore(){
 	}
 }
 
-
 export const activities = createActStore();
 
 function createGroups() {
@@ -144,10 +151,10 @@ function createGroups() {
 	const { subscribe, set, update } = writable(groups);
 	
 	const load = (acts: Map<string, Activity>) => {
-		const newGroups : Map<string, string[]> = new Map();	
+		const newGroups : Map<string, string[]> = new Map();
 		for(const a of acts.values())
 			{
-				const list : string[] | undefined = groups.get(a.group);
+				const list : string[] | undefined = newGroups.get(a.group);
 				if(list !== undefined){
 					newGroups.set(a.group, [...list, a.id]);
 				}
@@ -155,7 +162,7 @@ function createGroups() {
 					newGroups.set(a.group, [a.id]);
 				}
 			}
-			set(newGroups);
+		set(newGroups);
 	}
 
 	const addActivity = (group: string, id: string) => {
