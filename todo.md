@@ -35,3 +35,4 @@
 - togliere i settings se proprio non ne abbiamo
 - mettere i padding giusti per il cellulare
 - mettere la barra di caricamento su diario
+- material icon per okay

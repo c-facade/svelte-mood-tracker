@@ -3,12 +3,15 @@
 @use '@material/theme/color-palette';
 
 $primary: color-palette.$teal-a400;
+// #1DE9B6
 $primary-unsaturated: color-palette.$teal-500;
 $primary-light: color-palette.$teal-100;
 $darker-blue-grey: #172329;
 $secondary: color-palette.$purple-300;
 $secondary-light: color-palette.$purple-100;
 $error: color-palette.$red-300;
+$tab-bar-color: color-palette.$teal-500;
+//tab bar color: #009688
 
 @use '@material/theme/index' as theme with (
   $primary: $primary,
@@ -18,7 +21,9 @@ $error: color-palette.$red-300;
   $error: color-palette.$red-900
 );
 
-// FONT ------------------------
+main {
+	padding: 0 10px 0 10px;
+}
 
 a {
   color: $primary;
@@ -31,21 +36,6 @@ body {
 	margin: 0;
 	font-family: "Open Sans", sans-serif;
 	font-optical-sizing: auto;
-}
-
-.mdc-tab-bar {
-	background-color: color-palette.$teal-500;
-}
-
-
-// COME MODIFICARE UN COMPONENTE
-.mdc-tab {
-	--mdc-theme-primary: white;
-}
-
-
-.mdc-tab.active {
-	color: white;
 }
 
 .icon-color .mdc-banner__graphic {
@@ -78,16 +68,27 @@ button.red {
 }
 
 
+// MOBILE (default) STYLES
+
+header {
+	text-align: center;
+	margin: 16px;
+}
+
+.centered {
+	text-align: center;
+}
+
 // FORM --------------------
 
 form, .form-like{
 	background-color: $darker-blue-grey;
-	padding: 10px;
-	margin: 5px auto;
-	max-width: 95%;
+	padding: 5px;
+	margin: 0px auto;
 	display: flex;
 	flex-direction: column;
-	border-radius: 10px;
+	border-radius: 5px;
+	padding-bottom:15px;
 }
 
 form .mdc-button {
@@ -95,41 +96,24 @@ form .mdc-button {
 }
 
 fieldset {
-	border-radius: 10px;
-	//border-color: $primary;
-	padding: 20px;
-	margin: 5px;
+	margin-bottom: 10px;
+	margin: 3px;
+	padding: 5px 3px;
+	border: transparent;
 }
 
 legend {
 	border-radius: 5px;
 	padding: 5px;
-	//color: $primary;
+	font-weight: 600;
+	color: $primary-light;
 }
 
-input[type="checkbox"]{
-	border-radius: 1px;
-}
+// moods container
 
-/*
-.mdc-touch-target-wrapper {
-	padding: 5px;
-	background: black;
-	border-radius: 10px;
+#moods-container .material-symbols-outlined {
+	font-size:50px;
 }
-*/
-
-.activity-box {
-	padding: 10px;
-	background: black;
-	border-radius: 30px;
-	margin: 5px;
-}
-
-.activities-container{
-	display: flex;
-}
-
 
 // CHIPS -----------
 
@@ -137,20 +121,23 @@ form .mdc-chip {
 	background-color: transparent;
 	height: auto;
 	border-radius: 50px;
-	//padding: 5px;
-	//--mdc-theme-primary: transparent;
 	--mdc-theme-surface: transparent;
+	margin-bottom: 5px;
 }
 
 
 #moods-container .mdc-chip {
 	display: flex;
 	flex-direction: column;
+	margin: 0;
+	font-size: smaller;
+	padding: 5px;
 }
 
 #moods-container .mdc-chip-set {
 	flex-direction: row;
 	justify-content: space-around;
+	padding: 0px;
 }
 
 // DIARY STYLES ----------------------
@@ -184,3 +171,286 @@ h2.mood {
 	flex-wrap: wrap;
 }
 
+// GROUPS AND MENUS
+
+fieldset h4 {
+	margin: 10px;
+	margin-left: 10px;
+}
+
+.group{
+	margin-bottom: 15px;
+}
+
+.group-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+}
+
+.buttons-container {
+	float: right;
+}
+
+// ACTIVITIES
+
+	.activity-box {
+		display: inline-flex;
+		padding: 0;
+	}
+
+	.activities-container{
+		//display: flex;
+		//flex-wrap: wrap;
+		margin: 2px;
+	}
+
+	.activity-box label {
+		padding: 5px 7px;
+		margin: 3px;
+		border-radius: 20px;
+		background-color: black;
+		border: solid black 2px;
+	}
+
+// CHECKBOX
+
+.activity-box input[type="checkbox"]{
+	display: none;
+}
+
+.activity-box input:checked + label {
+	font-weight: bold;
+	background-color: $tab-bar-color;
+}
+
+// BOTTOM BAR --------------------
+
+.bottom-bar {
+	--mdc-theme-primary: #009688;
+	--mdc-theme-on-primary: white;
+	--mdc-theme-secondary: #1DE9B6;
+}
+
+
+// COME MODIFICARE UN COMPONENTE
+	.mdc-tab {
+		--mdc-theme-primary: white;
+	}
+
+
+	.mdc-tab.active {
+		color: white;
+	}
+
+.bottom-tavbar .mdc-tab__content{
+	font-size: 90%;
+}
+
+.bottom-tavbar .mdc-tab__stacked{
+	height: 70px;
+}
+
+
+
+// MOBILE SPECIFIC
+
+.top-tavbar {
+	display: none;
+}
+
+.bottom-bar {
+	visibility: visible;
+}
+
+.bottom-bar .smui-bottom-app-bar__section{
+	padding: 0 !important;
+	height: 70px !important;
+}
+
+.bottom-bar .mdc-tab {
+	padding: 0 !important;
+	min-width: 72px !important;
+}
+
+// ACTIVITY ITEM
+
+
+.activity-item.activity-container {
+	padding: 5px;
+	margin: 4px;
+	display: inline;
+	background-color: #00695C;
+	border-radius: 10px;
+}
+
+.activity-item .material-symbols-outlined {
+	display: inline-flex;
+	vertical-align: top;
+	font-size: 20px !important;
+}
+
+// GROUP EDITING
+
+.group .mdc-dialog .mdc-dialog__content {
+	padding: 5px;
+}
+
+
+// CELLULARI PIù sottili
+
+@media only screen and (max-width: 400){
+
+	#moods-container .material-symbols-outlined {
+		font-size:40px;
+	}
+}
+
+// FOR DESKTOP and BIG TABLET
+
+@media only screen and (min-width: 500px) {
+	
+	main {
+		max-width: 1000px;
+		margin: auto;
+	}
+
+
+	.top-tavbar {
+		display: block;
+	}
+
+	.bottom-bar{
+		visibility: hidden;
+	}
+
+	.mdc-tab-bar {
+		background-color: $tab-bar-color;
+	}
+
+
+	// COME MODIFICARE UN COMPONENTE
+	.mdc-tab {
+		--mdc-theme-primary: white;
+	}
+
+
+	.mdc-tab.active {
+		color: white;
+	}
+
+	form, .form-like{
+		background-color: $darker-blue-grey;
+		padding: 10px;
+		margin: 5px auto;
+		max-width: 95%;
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+	}
+
+	form .mdc-button {
+		margin: 10px;
+	}
+
+	fieldset {
+		border-radius: 10px;
+		//border-color: $primary;
+		padding: 20px;
+		margin: 5px;
+	}
+
+	legend {
+		border-radius: 5px;
+		padding: 5px;
+		font-weight: 600;
+		color: $primary-light;
+	}
+
+	input[type="checkbox"]{
+		border-radius: 1px;
+	}
+
+	/*
+	.mdc-touch-target-wrapper {
+		padding: 5px;
+		background: black;
+		border-radius: 10px;
+	}
+	*/
+
+
+	// CHIPS -----------
+
+	form .mdc-chip {
+		background-color: transparent;
+		height: auto;
+		border-radius: 50px;
+		//padding: 5px;
+		//--mdc-theme-primary: transparent;
+		--mdc-theme-surface: transparent;
+	}
+
+
+	#moods-container .mdc-chip {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#moods-container .mdc-chip-set {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	// DIARY STYLES ----------------------
+
+	h2.mood {
+		color: white;
+		text-transform: capitalize;
+	}
+
+	.diary-date {
+		color: $primary-light;
+		margin-bottom: 0;
+	}
+
+	.diary-page .entry {
+		background-color: black;
+		padding: 10px;
+		margin: 5px;
+		border-radius: 20px;
+	}
+
+	.diary-page {
+		background-color: $darker-blue-grey;
+		border-radius: 10px;
+		padding: 20px;
+		margin: 5px;
+	}
+
+	.entries-container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	#moods-container .material-symbols-outlined {
+		font-size:60px;
+	}
+
+// ACTIVITY EDITING
+
+	.activity-container {
+		padding: 5px;
+		margin: 4px;
+		display: inline;
+		background-color: #00695C;
+		border-radius: 10px;
+	}
+
+	.material-symbols-outlined {
+		display: inline-flex;
+		vertical-align: top;
+		font-size: 20px !important;
+	}
+
+}

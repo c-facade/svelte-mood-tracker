@@ -63,7 +63,6 @@
 			{/each}
 			<IconButton class="material-symbols-outlined" on:click$preventDefault={openNew}>add</IconButton>
 		</div>
-		{name}
 		</Content>
 
 	<Actions>

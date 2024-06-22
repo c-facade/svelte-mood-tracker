@@ -7,7 +7,7 @@ import type {Activity} from "../activitiesStore";
 	export let last = false;
 	let name = activity.name;
 	let container : HTMLDivElement;
-
+	let showIcons = false;
 	const dispatch = createEventDispatcher();
 
 	function deleteActivity(){
@@ -44,12 +44,12 @@ import type {Activity} from "../activitiesStore";
 
 </script>
 
-<div class="activity-container" bind:this={container}>
+<div class="activity-item activity-container" bind:this={container}>
 	{#if editing}
 		<Textfield placeholder={activity.name} bind:value={name} input$autofocus on:keyup={closeInput} on:blur={updateAndClose}>
 		</Textfield>
 	{:else}
-		{#if activity.symbol}
+		{#if activity.symbol && showIcons}
 			<span class="material-symbols-outlined">{activity.symbol}</span>
 		{/if}
 		<span role="button" tabindex=0 on:keyup={(e) => {
@@ -60,20 +60,3 @@ import type {Activity} from "../activitiesStore";
 			<button class="simple-button" type="button" on:click={deleteActivity}><span aria-label="delete">&#9747;</span></button>	
 	{/if}
 </div>
-
-<style>
-	.activity-container {
-		padding: 5px;
-		margin: 4px;
-		display: inline;
-		background-color: #00695C;
-		border-radius: 10px;
-	}
-
-	.material-symbols-outlined {
-		display: inline-flex;
-		vertical-align: top;
-		font-size: 20px !important;
-	}
-
-</style>

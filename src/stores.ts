@@ -5,37 +5,43 @@ import { writable } from "svelte/store";
 interface route {
 	name: string;
 	link: string;
+	icon: string;
 }
 
 export const routes : Map<string, route>= new Map([
 	['home', {
 		name: 'home',
-		link: '/'
+		mobileName: 'home',
+		link: '/',
+		icon: 'home'
 	}],
 	['diary',
 	{
 		name: 'diary',
-		link: '/diary'
+		mobileName: 'diary',
+		link: '/diary',
+		icon: 'book'
 	}],
 	['stats',
 	{
 		name: 'statistics',
-		link: '/stats'
-	}],
-	['settings',
-	{
-		name: 'settings',
-		link: '/settings'
+		mobileName: 'stats',
+		link: '/stats',
+		icon: 'show_chart'
 	}],
 	['about',
 	{
 		name: 'about',
-		link: '/about'
+		mobileName: 'about',
+		link: '/about',
+		icon: 'info'
 	}],
 	['account',
 	{
 		name: 'account',
-		link: '/account'
+		mobileName: 'account',
+		link: '/account',
+		icon: 'account_circle'
 	}]
 ]);
 

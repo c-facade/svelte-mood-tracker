@@ -104,11 +104,11 @@ async function uploadActivities(initialActivities : Map<string, Activity>, uid :
 
 function createActStore(){
 	const {subscribe, set, update} = writable<Map<string, Activity>>(defaultActivities);
-
 	
 	const downloadActivities = async (uid : string) => {
 		try{
 			const stored = await getStoredActivities(uid);
+			console.log(stored)
 			if(stored == null){
 				uploadActivities(defaultActivities, uid);
 			}
@@ -215,6 +215,7 @@ function createGroups() {
 	const load = () => {
 		const newGroups : Map<string, string[]> = new Map();
 		const acts = get(activities);
+		console.log("activities:", acts)
 		for(const a of acts.values())
 			{
 				if(a.archived) continue;
@@ -226,6 +227,7 @@ function createGroups() {
 					newGroups.set(a.group, [a.id]);
 				}
 			}
+		console.log(newGroups)
 		set(newGroups);
 		}
 

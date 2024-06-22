@@ -17,13 +17,6 @@
 		var entries : Entry[] = [];
 		if(!chosen) alert("You need to say how you feel.");
 		let mood = chosen.value; 
-		/*formData.get("mood");
-		if(mood === null){
-			alert("You need to say how you feel.");
-			return;
-		}
-		formData.delete("mood");
-		*/
 		entries.push(
 		{
 			activityName: 'mood',
@@ -55,6 +48,7 @@
 	let surface: MenuSurface;
 	let anchor: HTMLDivElement;
 	let chosen : Mood;
+	let showIcon = false;
 </script>
 
 <form on:submit|preventDefault={addEntry}>
@@ -63,7 +57,8 @@
 		<div id="moods-container">
 		<Set chips={moods} let:chip choice bind:selected={chosen}>
 			<Chip {chip} touch>
-				<span class="material-symbols-outlined">{chip.symbol}</span><span>{chip.name}</span>
+				<span class="material-symbols-outlined">{chip.symbol}</span>
+			<span>{chip.name}</span>
 			</Chip>
 		</Set>
 		</div>
@@ -74,25 +69,25 @@
 		<div class="groups-container">
 			{#each $groups as [name, list]}
 				<div class="group">
-					<div class="group-row">
-						<h4>{name}</h4>
-						<div class="buttons-container">
-							<EditGroup {list} {name} {errorActivity}/>
-							<DeleteGroup {name}/>
-						</div>
+					<div class="buttons-container">
+						<EditGroup {list} {name} {errorActivity}/>
+						<DeleteGroup {name}/>
 					</div>
-					<div class="activities-container">
-						{#each list.map((id) => ($activities.get(id) ?? errorActivity )) as a}
-							<div class="activity-box">
-								<input type="checkbox" name={a.name} id={a.id} value={a.id}>
-								<label for={a.id}>
-									{#if a.symbol}
-										<span class="material-symbols-outlined">{a.symbol}</span>
-									{/if}
-									&ensp;{a.name}
-								</label>
-							</div>
-						{/each}
+					<div class="group-container">
+						<h4>{name}</h4>
+						<div class="activities-container">
+							{#each list.map((id) => ($activities.get(id) ?? errorActivity )) as a}
+								<div class="activity-box">
+									<input type="checkbox" name={a.name} id={a.id} value={a.id}>
+									<label for={a.id}>
+										{#if a.symbol && showIcon}
+											<span class="material-symbols-outlined">{a.symbol}</span>
+										{/if}
+										&ensp;{a.name}
+									</label>
+								</div>
+							{/each}
+						</div>	
 					</div>
 				</div>
 			{/each}
@@ -110,16 +105,4 @@
 	</fieldset>
 	<Button variant="raised">OK</Button>
 </form>
-
-<style>
-	#moods-container .material-symbols-outlined {
-		font-size:60px;
-	}
-
-	.group-row {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-</style>
 

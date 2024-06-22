@@ -29,11 +29,8 @@
 	});
 	
 </script>
-
-<main>
 	
-<h1>Mood Tracker</h1>
-<p> Track your mood! </p>
+<p class="centered"> Track your mood! </p>
 
 {#if $isLoggedIn}
 	<NewEntry />
@@ -45,4 +42,3 @@
 	<p><a href="account">Login</a> to use the mood tracker.</p>
 {/if}
 
-</main>
