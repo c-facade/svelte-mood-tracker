@@ -27,7 +27,7 @@ export const routes : Map<string, route>= new Map([
 		name: 'statistics',
 		mobileName: 'stats',
 		link: '/stats',
-		icon: 'show_chart'
+		icon: 'insights'
 	}],
 	['about',
 	{

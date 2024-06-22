@@ -2,10 +2,8 @@
 	import Diary from "../../components/Diary.svelte";
 </script>
 
-<main>
-<h1>
+<h2 class="main roboto-serif">
 	This is your diary
-</h1>
+</h2>
 
 <Diary />
-</main>

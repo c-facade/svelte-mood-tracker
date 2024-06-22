@@ -11,8 +11,8 @@
 </script>
 
 <header>
-	<h1>
-		Mood tracker
+	<h1 class="jersey-25-regular">
+		Mood Tracker
 	</h1>
 </header>
 

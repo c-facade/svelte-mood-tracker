@@ -27,14 +27,14 @@
 
 {#each $diary as diarypage}
 	<div class="diary-page">	
-		<h3 class="diary-date">{diarypage.date.toLocaleDateString()}</h3>
+		<h4 class="diary-date">{diarypage.date.toLocaleDateString()}</h4>
 		{#if diarypage.entries[0].activityName == 'mood'}
-			<h2 class="mood">{getMood(diarypage.entries[0].value)}</h2>
+			<h3 class="mood">{getMood(diarypage.entries[0].value)}</h3>
 		{/if}
 		<div class="entries-container">
 			{#each diarypage.entries.slice(1) as entry}
 				{#if entry.activityName == 'mood'}
-					<h2 class="mood">{getMood(entry.value)}</h2>
+					<h3 class="mood">{getMood(entry.value)}</h3>
 				{:else}
 					<p class="entry">{entry.activityName}</p>
 				{/if}

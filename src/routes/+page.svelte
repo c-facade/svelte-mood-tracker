@@ -29,8 +29,8 @@
 	});
 	
 </script>
-	
-<p class="centered"> Track your mood! </p>
+
+<div hidden class="centered subheading roboto-serif"> Track your mood </div>
 
 {#if $isLoggedIn}
 	<NewEntry />

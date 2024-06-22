@@ -25,14 +25,17 @@
 
 ## DA FARE ANCORA
 
-- migliorare tab bar
-- header con titolo?
-- cambiare titolo html
+- migliorare tab bar OK
+- header con titolo? OK
+- cambiare titolo html OK
 - mettere emoticons nel diario
-- migliorare il touch target dei wrapper
-- nuovo gruppo
-- statistiche
-- togliere i settings se proprio non ne abbiamo
-- mettere i padding giusti per il cellulare
-- mettere la barra di caricamento su diario
-- material icon per okay
+- migliorare il touch target dei wrapper OK
+- nuovo gruppo 
+- statistiche 
+- togliere i settings se proprio non ne abbiamo OK\
+- mettere i padding giusti per il cellulare OK
+- mettere la barra di caricamento su diario OK
+- material icon per okay ??
+- spostarsi sul diario quando si sottomette il form
+- e resettarlo (togliere preventDefault??)
+- stili per desktop...
