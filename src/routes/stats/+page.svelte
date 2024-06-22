@@ -2,6 +2,12 @@
 Statistics
 </h2>
 
+<div>
+<img id="line-chart" src="/line-graph.png" alt="line chart" style="width: 40%"/>
+</div>
+<label for="line-chart">This is an image...</label>
+
+<!-->
 <script lang="ts">
 	//import { diary } from "../../entriesStore";
 	import Preview from '../../layercake-components/Preview.svelte';
@@ -43,4 +49,4 @@ Statistics
     </Chart>
   </div>
 </Preview>
-
+</-->

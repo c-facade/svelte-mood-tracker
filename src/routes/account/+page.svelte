@@ -10,6 +10,7 @@
 	import { errorMessage } from "../../stores";
 	import getErrorMessage from '$lib/errors';
 	import { openBanner } from "../../stores";
+	import Button from '@smui/button'
 
 	async function signIn(event : CustomEvent) {
 	try {
@@ -39,13 +40,13 @@
 		else $isLoggedIn = false;
 	});
 </script>
-<main>
 	<p>Per testare l'applicazione, usa le credenziali "username@gmail.com" e "password".
 	</p>
 
 {#if $isLoggedIn}
-	<h4>{auth.currentUser ? auth.currentUser.displayName : "error"}</h4>
-	<button on:click={logout} class="danger">Log out</button>
+	<h3 class="roboto-serif">{auth.currentUser ? auth.currentUser.displayName : "error"}</h3>
+	<p>Track your mood!</p>
+	<Button on:click={logout} variant="unelevated" class="danger">Log out</Button>
 {:else}
 <div>
 	<div class="sign-in-form">
@@ -55,4 +56,3 @@
 </div>
 {/if}
 
-</main>

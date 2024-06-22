@@ -1,7 +1,6 @@
-<main>
-<h1>
+<h2>
 	About Mood Tracker
-</h1>
+</h2>
 
 <p>Mood tracker is a web application that was created for the Web Application Development course at University of Pisa.
 	</p>
@@ -10,4 +9,6 @@
 <p>
 Its objective is to provide insight on the user's daily moods and what may influence them.
 </p>
-</main>
+<p>
+	Check out the <a href="https://github.com/c-facade/c-facade.github.io">source code</a> on GitHub.
+</p>
