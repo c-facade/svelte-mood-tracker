@@ -54,7 +54,10 @@
 		"@smui/segmented-button": "^7.0.0",
 		"@smui/tab": "^7.0.0",
 		"@smui/tab-bar": "^7.0.0",
+		"@types/chart.js": "^2.9.41",
+		"chart.js": "^4.4.3",
 		"firebase": "^10.12.2",
+		"svelte-chartjs": "^3.1.5",
 		"uuid": "^10.0.0"
 	}
 }

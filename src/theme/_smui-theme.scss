@@ -63,7 +63,7 @@ header {
 	//background-color: black;
 }
 
-header h1 {
+header.mobile h1 {
 	margin: 0;
 	color: $primary;
 	text-shadow: 2px 2px black;
@@ -330,28 +330,52 @@ fieldset h4 {
 	padding: 5px;
 }
 
+// HEADER -------------
+
+header.mobile {
+	display: block;
+}
+
+header.desktop{
+	display: none;
+}
+
 
 // CELLULARI PIù sottili
 
-@media only screen and (max-width: 400){
+@media only screen and (max-width: 400px){
 
 	#moods-container .material-symbols-outlined {
 		font-size:40px;
 	}
 }
 
-// FOR DESKTOP and BIG TABLET
 
-@media only screen and (min-width: 500px) {
-	
+// FOR TABLET
+
+@media only screen and (max-width: 840px) {
+	.top-tavbar .mdc-tab {
+		min-width: 80px !important;
+		padding: 2px !important;
+	}
+}
+
+// FOR DESKTOP and TABLET
+
+
+
+@media only screen and (min-width: 600px) {
+
 	main {
 		max-width: 1000px;
 		margin: auto;
+		padding: 10px;
 	}
-
 
 	.top-tavbar {
 		display: block;
+		position: sticky;
+		top: 0;
 	}
 
 	.bottom-bar{
@@ -362,57 +386,49 @@ fieldset h4 {
 		background-color: $tab-bar-color;
 	}
 
-
-	// COME MODIFICARE UN COMPONENTE
-	.mdc-tab {
-		--mdc-theme-primary: white;
+	// HEADER --------------
+	header.mobile {
+		display: none;
 	}
 
-
-	.mdc-tab.active {
+	header.desktop {
+		display: block;
 		color: white;
+		background-color: $tab-bar-color;
+		text-shadow: 3px 3px teal;
 	}
+
+	header.desktop h1 {
+		margin:0;
+		font-size: xxx-large;
+	}
+
+
+	main h2 {
+		text-align: center;
+	}
+
 
 	form, .form-like{
-		background-color: $darker-blue-grey;
 		padding: 10px;
 		margin: 5px auto;
 		max-width: 95%;
-		display: flex;
-		flex-direction: column;
 		border-radius: 10px;
 	}
 
-	form .mdc-button {
-		margin: 10px;
-	}
 
 	fieldset {
-		border-radius: 10px;
-		//border-color: $primary;
 		padding: 20px;
 		margin: 5px;
 	}
-
-	legend {
-		border-radius: 5px;
-		padding: 5px;
-		font-weight: 600;
-		color: $primary-light;
-	}
-
 	input[type="checkbox"]{
 		border-radius: 1px;
 	}
 
-	/*
-	.mdc-touch-target-wrapper {
-		padding: 5px;
-		background: black;
-		border-radius: 10px;
-	}
-	*/
 
+	#moods-container .material-symbols-outlined {
+		font-size:60px;
+	}
 
 	// CHIPS -----------
 
@@ -434,6 +450,10 @@ fieldset h4 {
 	#moods-container .mdc-chip-set {
 		flex-direction: row;
 		justify-content: space-around;
+	}
+	
+	#moods-container .material-symbols-outlined {
+		font-size:60px;
 	}
 
 	// DIARY STYLES ----------------------
@@ -482,11 +502,4 @@ fieldset h4 {
 		background-color: #00695C;
 		border-radius: 10px;
 	}
-
-	.material-symbols-outlined {
-		display: inline-flex;
-		vertical-align: top;
-		font-size: 20px !important;
-	}
-
 }

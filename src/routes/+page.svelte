@@ -14,14 +14,18 @@
 			auth,
 			(user) => {
 				if(user){
-					isLoggedIn.set(true);
+					isLoggedIn.set(1);
 					activities.downloadActivities(user.uid);
 				}
 				else if(!$redirectedToLogin){
+					isLoggedIn.set(-1);
 					window.setTimeout(()=>{}, 1000);
 					selectedTab.set(routes.get('account'))
 					redirectedToLogin.set(true);
 					goto('/account');
+				}
+				else{
+					isLoggedIn.set(-1);
 				}
 			}
 		);
@@ -32,13 +36,14 @@
 
 <div hidden class="centered subheading roboto-serif"> Track your mood </div>
 
-{#if $isLoggedIn}
+{#if $isLoggedIn > 0}
 	<NewEntry />
 {:else if !$redirectedToLogin}
 	<div style="display: flex; justify-content: center">
   <CircularProgress style="height: 32px; width: 32px;" indeterminate />
 	</div>
-{:else}
+{:else if $isLoggedIn < 0}
+	<h2>Add a new entry</h2>
 	<p><a href="account">Login</a> to use the mood tracker.</p>
 {/if}
 

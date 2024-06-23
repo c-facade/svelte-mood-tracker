@@ -18,11 +18,11 @@
 				event.detail.password
 			);
 			await updateProfile(user.user, {displayName: event.detail.username });
-			isLoggedIn.set(true)
+			isLoggedIn.set(1)
 			userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
 			// creo un nuovo documento con i dati dell'utente
 			await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
-			selectedTab.set(routes[0]);
+			selectedTab.set(routes.get('home'));
 			goto('/');
 		
 			} catch (e) {

@@ -4,6 +4,7 @@ import { writable } from "svelte/store";
 
 interface route {
 	name: string;
+	mobileName: string;
 	link: string;
 	icon: string;
 }

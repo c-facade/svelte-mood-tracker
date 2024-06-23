@@ -1,9 +1,9 @@
 <script lang="ts">
-    import {onMount} from 'svelte';
+  import {onMount} from 'svelte';
 	import {moods} from '../activitiesStore';
 	import type { Mood } from '../activitiesStore';
 	import { diary } from '../entriesStore';
-    import {onAuthStateChanged} from 'firebase/auth';
+  import {onAuthStateChanged} from 'firebase/auth';
 	import { auth } from '../firebase';
 	import LinearProgress from '@smui/linear-progress'
 	import { isLoggedIn } from '../userStore';
@@ -11,10 +11,15 @@
 	// TODO style uppercase and or add symbols
 	
 	onMount( () => {
-		onAuthStateChanged(auth, () => {
-			diary.updateFromFirestore();
+		onAuthStateChanged(auth, (user) => {
+			if(user){
+				isLoggedIn.set(1);
+				diary.updateFromFirestore();
 			}
-			);
+			else{
+				isLoggedIn.set(-1);
+			}
+		});
 	});
 	
 	const getMood = (value : number | boolean) => {
@@ -42,8 +47,8 @@
 		</div>
 	</div>
 {:else}
-	{#if $isLoggedIn}
-	Your entries will be shown here
+	{#if $isLoggedIn != 0}
+		<div class="diarypage">Your entries will be shown here.</div>
 	{:else}
 		<LinearProgress indeterminate />
 	{/if}

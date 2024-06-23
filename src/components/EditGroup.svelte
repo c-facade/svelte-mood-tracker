@@ -58,7 +58,7 @@
 				{#if index == temporaryLen && editLast}
 					<ActivityItem activity={a} editing={true} last={true} on:added={handleAdded}/>
 				{:else}
-					<ActivityItem activity={a} />
+					<ActivityItem activity={a}/>
 				{/if}
 			{/each}
 			<IconButton class="material-symbols-outlined" on:click$preventDefault={openNew}>add</IconButton>

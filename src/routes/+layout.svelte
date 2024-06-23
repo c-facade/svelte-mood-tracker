@@ -8,16 +8,27 @@
 	import BottomAppBar, { AutoAdjust, Section } from '@smui-extra/bottom-app-bar';
 	
 	let bottomAppBar: BottomAppBar;
+	let windowWidth: number;	
+	$: stackTop = windowWidth < 840;
+
 </script>
 
-<header>
+<svelte:window bind:outerWidth={windowWidth} />
+
+<header class="mobile">
+	<h1 class="jersey-25-regular">
+		Mood Tracker
+	</h1>
+</header>
+
+<header class="desktop">
 	<h1 class="jersey-25-regular">
 		Mood Tracker
 	</h1>
 </header>
 
 <TabBar	tabs={[...routes.values()]} let:tab bind:active={$selectedTab} class="top-tavbar">
-	<Tab {tab} href={tab.link} minWidth={false}>
+	<Tab {tab} href={tab.link} minWidth={false} stacked={stackTop}>
 		<Icon class="material-icons">{tab.icon}</Icon>
 		<Label>{tab.name}</Label>
 	</Tab>

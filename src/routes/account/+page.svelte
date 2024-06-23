@@ -2,8 +2,7 @@
 	import SignIn from "../../components/sign_in.svelte";
   import { onAuthStateChanged, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth';
   import { goto } from '$app/navigation';
-  import { auth, userDoc } from '../../firebase';
-  import { setDoc } from 'firebase/firestore/lite';
+  import { auth } from '../../firebase';
 	import {userSettings} from "../../userStore";
 	import { isLoggedIn } from "../../userStore";
   import {routes, selectedTab} from "../../stores";
@@ -18,7 +17,7 @@
 		await updateProfile(user.user, { displayName: event.detail.username });
 		userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
 		//await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
-		isLoggedIn.set(true);
+		isLoggedIn.set(1);
 		selectedTab.set(routes.get('home'));
 		await goto('/');
 	} catch (e) {
@@ -28,22 +27,23 @@
 	}
 }
 	async function logout() {
-		isLoggedIn.set(false);
+		isLoggedIn.set(-1);
 		userSettings.reset();
 		signOut(auth);
 	}
 
 	onAuthStateChanged(auth, (user) => {
 		if(user){
-			$isLoggedIn = true
+			isLoggedIn.set(1)
 		}
-		else $isLoggedIn = false;
+		else isLoggedIn.set(-1)
 	});
 </script>
+<main class="centered">
 	<p>Per testare l'applicazione, usa le credenziali "username@gmail.com" e "password".
 	</p>
 
-{#if $isLoggedIn}
+	{#if $isLoggedIn > 0}
 	<h3 class="roboto-serif">{auth.currentUser ? auth.currentUser.displayName : "error"}</h3>
 	<p>Track your mood!</p>
 	<Button on:click={logout} variant="unelevated" class="danger">Log out</Button>
@@ -55,4 +55,5 @@
 	</div>
 </div>
 {/if}
+</main>
 
