@@ -1,52 +1,42 @@
-<h2 class="main roboto-serif">
+<script>
+    import {onMount} from "svelte";
+    import SimpleChart from "../../components/SimpleChart.svelte";
+    import {onAuthStateChanged} from "firebase/auth";
+    import {auth} from "../../firebase";
+    import {diary} from "../../entriesStore";
+		import { isLoggedIn } from "../../userStore";
+		import { fade } from 'svelte/transition';
+    import LinearProgress from "@smui/linear-progress";
+
+	onMount( () => {
+		onAuthStateChanged(auth, (user) => {
+			if(user){
+				isLoggedIn.set(1);
+				diary.updateFromFirestore();
+			}
+			else{
+				isLoggedIn.set(-1);
+			}
+		})
+	});
+	
+</script>
+
+<h2>
 Statistics
 </h2>
 
-<div>
-<img id="line-chart" src="/line-graph.png" alt="line chart" style="width: 40%"/>
-</div>
-<label for="line-chart">This is an image...</label>
+{#if $diary[0] && $isLoggedIn>0}
+	<SimpleChart />
+{:else if $isLoggedIn == 0}
+	<LinearProgress indeterminate/>
+{:else if $isLoggedIn>0}
+	<p in:fade={{delay: 1000}}>
+	<a href="/diary">Add a new entry</a> to see statistics.
+	</p>
+{:else}
+	<p>
+	<a href="/account">Log in</a> to see statistics.
+	</p>
+{/if}
 
-<!-->
-<script lang="ts">
-	//import { diary } from "../../entriesStore";
-	import Preview from '../../layercake-components/Preview.svelte';
-	import { createDateSeries } from '../../layercake-components/genData';
-	import { scaleTime } from 'd3-scale';
-	import { formatDate, PeriodType } from 'svelte-ux';
-
-	import {
-		Chart,
-		Svg,
-		Axis,
-		Spline
-	} from 'layerchart';
-
-	const dateSeriesData = createDateSeries({ count: 30, min: 50, max: 100, value: 'integer'});
-
-</script>
-
-<Preview data={dateSeriesData}>
-  <div class="h-[300px] p-4 border rounded">
-    <Chart
-      data={dateSeriesData}
-      x="date"
-      xScale={scaleTime()}
-      y="value"
-      yDomain={[0, null]}
-      yNice
-      padding={{ left: 16, bottom: 24 }}
-    >
-      <Svg>
-        <Axis placement="left" grid rule />
-        <Axis
-          placement="bottom"
-          format={(d) => formatDate(d, PeriodType.Day, { variant: 'short' })}
-          rule
-        />
-        <Spline class="stroke-2 stroke-primary" />
-      </Svg>
-    </Chart>
-  </div>
-</Preview>
-</-->
