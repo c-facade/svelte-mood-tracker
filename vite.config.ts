@@ -9,12 +9,18 @@ export default defineConfig({
 			devOptions: {
 				enabled: true
 			},
+			// cache all the imports
+			workbox: {
+				globPatterns: ["**/*"],
+			},
+			// use something to cache all the static assets?
 			includeAssets: ['favicon.svg', 'smui.css'],
 			manifest: {
 				name: 'Mood Tracker',
 				short_name: 'MoodTracker',
         description: 'Track your mood',
-        theme_color: '#1DE9B6',
+				theme_color: '#009688',
+				background_color: 'black',
         icons: [
           {
             src: 'favicon.svg',

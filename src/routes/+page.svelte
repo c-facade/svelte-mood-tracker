@@ -19,7 +19,6 @@
 				}
 				else if(!$redirectedToLogin){
 					isLoggedIn.set(-1);
-					window.setTimeout(()=>{}, 1000);
 					selectedTab.set(routes.get('account'))
 					redirectedToLogin.set(true);
 					goto('/account');
