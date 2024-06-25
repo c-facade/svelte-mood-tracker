@@ -32,7 +32,7 @@
 	});
 	
 </script>
-
+<main class="centered">
 <div hidden class="centered subheading roboto-serif"> Track your mood </div>
 
 {#if $isLoggedIn > 0}
@@ -45,4 +45,4 @@
 	<h2>Add a new entry</h2>
 	<p><a href="account">Login</a> to use the mood tracker.</p>
 {/if}
-
+</main>

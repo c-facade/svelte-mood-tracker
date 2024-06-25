@@ -22,6 +22,7 @@
 	
 </script>
 
+<main class="centered">
 <h2>
 Statistics
 </h2>
@@ -40,3 +41,4 @@ Statistics
 	</p>
 {/if}
 
+</main>
