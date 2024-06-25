@@ -39,3 +39,7 @@
 - spostarsi sul diario quando si sottomette il form
 - e resettarlo (togliere preventDefault??)
 - stili per desktop...
+
+- abilitare persistent storage
+- aggiungere notifiche
+- spostarsi sul diario quando si sottomette il form!
