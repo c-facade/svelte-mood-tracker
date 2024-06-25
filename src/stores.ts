@@ -58,4 +58,5 @@ export const errorMessage = writable("Everything OK");
 
 export const openBanner = writable(false);
 
+export const entryDate = writable<Date>(new Date());
 

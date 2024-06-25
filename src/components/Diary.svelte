@@ -15,6 +15,7 @@
 			if(user){
 				isLoggedIn.set(1);
 				diary.updateFromFirestore();
+				console.log($diary);
 			}
 			else{
 				isLoggedIn.set(-1);
@@ -30,9 +31,10 @@
 
 </script>
 
+{#if $isLoggedIn>0}
 {#each $diary as diarypage}
-	<div class="diary-page">	
-		<h4 class="diary-date">{diarypage.date.toLocaleDateString()}</h4>
+	<div class="diary-page">
+		<h4 class="diary-date">{diarypage.date.toLocaleDateString()} {diarypage.date.toLocaleTimeString([], {timeStyle: "short"})}</h4>
 		{#if diarypage.entries[0].activityName == 'mood'}
 			<h3 class="mood">{getMood(diarypage.entries[0].value)}</h3>
 		{/if}
@@ -45,6 +47,11 @@
 				{/if}
 			{/each}
 		</div>
+		{#if diarypage.note}
+			<div style="padding-left: 10px; margin: 5px;" class="diary-note">
+					{diarypage.note}
+			</div>
+		{/if}
 	</div>
 {:else}
 	{#if $isLoggedIn != 0}
@@ -53,6 +60,11 @@
 		<LinearProgress indeterminate />
 	{/if}
 {/each}
+{:else if $isLoggedIn < 0}
+	<div class="diarypage">Your entries will be shown here</div>
+{:else}
+	<LinearProgress indeterminate />
+{/if}
 
 <style>
 </style>
