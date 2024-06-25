@@ -12,6 +12,7 @@ export interface Entry {
 
 export interface DiaryPage {
 	date: Date;
+	note: string | null;
 	entries: Entry[];
 }
 
@@ -22,7 +23,8 @@ async function getStoredEntries() {
 		const snapshot = await getDocs(query(cRef, orderBy("date", "desc")));
 		const stored : DiaryPage[] = snapshot.docs.map((e) => (
 			{date: e.data().date.toDate(),
-				entries: e.data().entries
+				entries: e.data().entries,
+				note: e.data().note
 			} as DiaryPage)
 																									);
 		return stored;

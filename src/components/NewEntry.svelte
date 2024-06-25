@@ -9,13 +9,38 @@
 		import Chip, { Set } from '@smui/chips';
 		import EditGroup from './EditGroup.svelte';
 		import DeleteGroup from './DeleteGroup.svelte';
+    import {routes, selectedTab} from '../stores';
+    import {goto} from '$app/navigation';
+	import LoadDefault from './LoadDefault.svelte';
+    import DateTime from './DateTime.svelte';
+    import {get} from 'svelte/store';
+	import { entryDate } from '../stores';
+    import Textfield from '@smui/textfield';
 
-	function addEntry(e : SubmitEvent){
+
+	let errorActivity : Activity = {
+		id: 'zero',
+		name: "error",
+		symbol: null,
+		group: "default",
+		archived: false
+	};
+
+	let surface: MenuSurface;
+	let anchor: HTMLDivElement;
+	let chosen : Mood;
+	let showIcon = false;
+	let entryNote = "";
+
+function addEntry(e : SubmitEvent){
 		console.log("Adding");
 		let form = e.target as HTMLFormElement;
 		const formData = new FormData(form);
 		var entries : Entry[] = [];
-		if(!chosen) alert("You need to say how you feel.");
+		if(!chosen){
+			alert("Please rate your mood");
+			return;
+		}
 		let mood = chosen.value; 
 		entries.push(
 		{
@@ -31,27 +56,18 @@
 				value: true
 			});
 		}
-		console.log(entries);
-		const date = new Date();
-		const page : DiaryPage = {entries, date};
+		let note = entryNote == "" ? null : entryNote;
+		const date = get(entryDate);
+		const page : DiaryPage = {entries, date, note};
+		console.log(page)
 		diary.addPage(page);
+		selectedTab.set(routes.get("diary"));
+		goto("/diary");
 	}
-
-	let errorActivity : Activity = {
-		id: 'zero',
-		name: "error",
-		symbol: null,
-		group: "default",
-		archived: false
-	};
-
-	let surface: MenuSurface;
-	let anchor: HTMLDivElement;
-	let chosen : Mood;
-	let showIcon = false;
 </script>
 
 <form on:submit|preventDefault={addEntry}>
+	<DateTime/>
 	<fieldset>
 		<legend>How are you today?</legend>
 		<div id="moods-container">
@@ -81,9 +97,9 @@
 									<input type="checkbox" name={a.name} id={a.id} value={a.id}>
 									<label for={a.id}>
 										{#if a.symbol && showIcon}
-											<span class="material-symbols-outlined">{a.symbol}</span>
+											<span class="material-symbols-outlined">{a.symbol}&ensp;</span>
 										{/if}
-										&ensp;{a.name}
+										{a.name}
 									</label>
 								</div>
 							{/each}
@@ -102,6 +118,18 @@
 	<NewActivity surface={surface}/>
 </MenuSurface>
 	</div>
+		<LoadDefault/>
+	</fieldset>
+	<fieldset>
+		<legend>
+			Add a text note
+		</legend>
+		<Textfield 
+			textarea
+			style="width: 90%;"
+	 		bind:value={entryNote}
+	 ></Textfield>
+		{entryNote}
 	</fieldset>
 	<Button variant="raised">OK</Button>
 </form>
