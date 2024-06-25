@@ -184,6 +184,12 @@ h3.mood {
 	margin-bottom: 0;
 	margin-top: 5px;
 	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.form-date {
+	color: $primary-unsaturated;
+	font-weight: bold;
 }
 
 .diary-page .entry {
@@ -376,6 +382,7 @@ header.desktop{
 		display: block;
 		position: sticky;
 		top: 0;
+		z-index: 1;
 	}
 
 	.bottom-bar{
