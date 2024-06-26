@@ -8,6 +8,7 @@
 		<link rel="apple-touch-icon" href="/favicon.svg">
 		<link rel="mask-icon" href="/favicon.svg" color="#000000">
 		<meta name="theme-color" content="#1DE9B6">
+		<link rel="manifest" href="/app.webmanifest" crossorigin="use-credentials"
 		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,20 +24,10 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+		<script href="src/main.ts" type="module"></script>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
-	<script>
-		if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js')
-    .then((registration) => {
-      console.log('Service Worker registered with scope:', registration.scope);
-    })
-    .catch((error) => {
-      console.error('Service Worker registration failed:', error);
-    });
-	}
-	</script>
 </html>
