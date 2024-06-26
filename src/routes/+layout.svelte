@@ -4,7 +4,7 @@
   //import {isLoggedIn} from '../userStore';
   import TabBar from '@smui/tab-bar';
 	import Tab, {Icon, Label} from '@smui/tab';
-	import { routes, selectedTab } from '../stores';
+	import { errorMessage, openBanner, routes, selectedTab } from '../stores';
 	import BottomAppBar, { AutoAdjust, Section } from '@smui-extra/bottom-app-bar';
     import ErrorBanner from '../components/ErrorBanner.svelte';
 	
@@ -12,9 +12,34 @@
 	let windowWidth: number;	
 	$: stackTop = windowWidth < 840;
 
+/*
+	window.addEventListener("offline", (e) => {
+		console.log("Offline.: "+ e);
+	errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
+		openBanner.set(true);
+	});
+
+	window.addEventListener("online", (e) => {
+		console.log("Online: "+e);
+	errorMessage.set({red: false, message:"Back online: resuming synchronization."});
+		openBanner.set(true);
+		});
+*/
+
+	const offlineHandler = (e : Event) => {
+		console.log(e);
+	errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
+		openBanner.set(true);
+	};
+
+	const onlineHandler = (e : Event) => {
+		console.log(e);
+	errorMessage.set({red: false, message:"Back online: resuming synchronization."});
+		openBanner.set(true);
+		};
 </script>
 
-<svelte:window bind:outerWidth={windowWidth} />
+<svelte:window bind:outerWidth={windowWidth} on:online={onlineHandler} on:offline={offlineHandler}/>
 
 <header class="mobile">
 	<h1 class="jersey-25-regular">

@@ -12,6 +12,9 @@
 	import Button from '@smui/button';
 	import Switch from '@smui/switch';
 	import FormField from '@smui/form-field';
+	import {mobileNotification, registerPeriodicNotifications, removePeriodicNotifications} from '$lib/notifications';
+
+	let active = false;
 
 	async function signIn(event : CustomEvent) {
 	try {
@@ -42,17 +45,35 @@
 	});
 
 	function notifications() {
+		if(active == true){
+			removePeriodicNotifications();	
+			errorMessage.set(
+			{
+				red: false, 
+				message: "Periodic notifications are disabled. To disallow all notifications, revoke the permission from your browser."
+			});
+			openBanner.set(true);
+			active = false;
+			return;
+		}
 		if(!("Notification" in window)) {
 			alert("This browser does not support desktop notifications");
+			active = false;
 		}
 		else if(Notification.permission === "granted") {
-			var notification = new Notification("Hello",
-				{body: "You allowed notifications"});
+			var notification = new Notification("Notifications are allowed");
+			console.log(notification);
+			mobileNotification("Notifications are allowed");
+			active = true;
 		}
 		else if(Notification.permission !== "denied") {
 			Notification.requestPermission().then((permission) => {
 				if (permission === "granted") {
-					const notification = new Notification("Hi there!");
+					const notification = new Notification("You allowed notifications.");
+					registerPeriodicNotifications();
+					console.log(notification);
+					mobileNotification("You allowed notifications");
+					active = true;
 				}
 			});
 		}
@@ -63,7 +84,9 @@
 			}
 			);
 			openBanner.set(true);
+			active = false;
 		}
+		userSettings.update((s) => ({...s, notifications: active}));
 	}
 
 </script>
@@ -76,10 +99,11 @@
 	<p>Track your mood!</p>
 	<p>
 	<FormField>
-		<Switch on:click={notifications} />
+		<Switch on:click={notifications} bind:value={active}/>
 		<span slot="label">Remind me to add a new entry</span>
 	</FormField>
 	</p>
+	{active}
 	<Button on:click={logout} variant="unelevated" class="danger">Log out</Button>
 {:else}
 <div>
