@@ -9,13 +9,11 @@ export default defineConfig({
 			devOptions: {
 				enabled: true
 			},
-			registerType: 'autoUpdate',
 			// cache all the imports
 			workbox: {
 				globPatterns: ["**/*"],
 			},
-			// use something to cache all the static assets?
-			includeAssets: ['favicon.svg', 'smui.css'],
+			includeAssets: ["**/*"],
 			manifest: {
 				name: 'Mood Tracker',
 				short_name: 'MoodTracker',
