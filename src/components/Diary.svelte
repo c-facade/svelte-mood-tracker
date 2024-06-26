@@ -55,13 +55,13 @@
 	</div>
 {:else}
 	{#if $isLoggedIn != 0}
-		<div class="diarypage">Your entries will be shown here.</div>
+		<div class="diarypage centered">Your entries will be shown here.</div>
 	{:else}
 		<LinearProgress indeterminate />
 	{/if}
 {/each}
 {:else if $isLoggedIn < 0}
-	<div class="diarypage">Your entries will be shown here</div>
+	<div class="diarypage centered">Your entries will be shown here</div>
 {:else}
 	<LinearProgress indeterminate />
 {/if}

@@ -2,7 +2,7 @@
 	import Diary from "../../components/Diary.svelte";
 </script>
 
-<main class="centered">
+<main>
 <h2>
 	This is your diary
 </h2>

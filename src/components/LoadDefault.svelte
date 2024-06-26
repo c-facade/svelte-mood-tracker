@@ -3,23 +3,23 @@
 	import Dialog, { Title, Content, Actions }from "@smui/dialog";
 	import { activities, defaultActivities } from "../activitiesStore";
 	import type { Activity } from "../activitiesStore";
-	let open = false;
-	let selected : Activity[] = [];
+	let openImport = false;
+	let sel : Activity[] = [];
 
 	function update() {
-		console.log(selected);
-		activities.updateWith(selected);
+		console.log(sel);
+		activities.updateWith(sel);
 	}
 		
 </script>
 
 
 
-<Button on:click$preventDefault ={ () => (open=true)}>Load default activities</Button>
-<Dialog bind:open>
+<Button on:click$preventDefault ={ () => (openImport=true)}>Load default activities</Button>
+	<Dialog bind:open={openImport}>
 	<Title>Select the activities you want to import</Title>
 		<Content>
-		<div class="activities-container">
+		<div class="default-activities-container">
 			{#each defaultActivities as [, a]}
 				<div class="activity-box">
 					<input 
@@ -27,7 +27,7 @@
 			name="selected"
 		 	value={a}
 		 	id={a.id}
-		 	bind:group={selected}
+		 	bind:group={sel}
 		 >
 			<label for={a.id}>
 				{a.name}
@@ -48,7 +48,7 @@
 </Dialog>
 
 <style>
-	.activities-container {
+	.default-activities-container {
 		display: flex;
 		flex-wrap: wrap;
 	}
