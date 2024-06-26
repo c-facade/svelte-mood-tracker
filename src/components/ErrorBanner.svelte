@@ -5,13 +5,13 @@ import { errorMessage, openBanner } from "../stores";
 import Button from "@smui/button";
 </script>
 
-<Banner class="icon-color"
+<Banner class={$errorMessage.red ? "icon-color-red" : "icon-color-primary"}
 	 bind:open={$openBanner}
 	 centered
 	>
 	<Icon class="material-icons" slot="icon">error</Icon>
 	<Label slot="label">
-		 {$errorMessage}
+		 {$errorMessage.message}
 	 </Label>
 	 <svelte:fragment slot="actions">
 			<Button>OK</Button>

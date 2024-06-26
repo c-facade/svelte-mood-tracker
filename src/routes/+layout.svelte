@@ -6,6 +6,7 @@
 	import Tab, {Icon, Label} from '@smui/tab';
 	import { routes, selectedTab } from '../stores';
 	import BottomAppBar, { AutoAdjust, Section } from '@smui-extra/bottom-app-bar';
+    import ErrorBanner from '../components/ErrorBanner.svelte';
 	
 	let bottomAppBar: BottomAppBar;
 	let windowWidth: number;	
@@ -33,6 +34,8 @@
 		<Label>{tab.name}</Label>
 	</Tab>
 </TabBar>
+
+<ErrorBanner />
 
 <AutoAdjust {bottomAppBar}>
 

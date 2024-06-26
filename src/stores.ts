@@ -54,7 +54,15 @@ export const redirectedToLogin = writable(false);
 
 // ERRORS -----------
 
-export const errorMessage = writable("Everything OK");
+export interface ErrorMessage {
+	message: string;
+	red: boolean;
+}
+
+export const errorMessage = writable<ErrorMessage>({
+	message: "Everything OK",
+	red: false
+});
 
 export const openBanner = writable(false);
 

@@ -38,8 +38,13 @@ body {
 	font-optical-sizing: auto;
 }
 
-.icon-color .mdc-banner__graphic {
+.icon-color-red .mdc-banner__graphic {
 	color: color-palette.$red-900;
+	background: black;
+}
+
+.icon-color-primary .mdc-banner__graphic {
+	color: $primary;
 	background: black;
 }
 
@@ -375,7 +380,7 @@ header.desktop{
 	main {
 		max-width: 1000px;
 		margin: auto;
-		padding: 10px;
+		padding-bottom: 10px;
 	}
 
 	.top-tavbar {
@@ -418,7 +423,7 @@ header.desktop{
 
 	form, .form-like{
 		padding: 10px;
-		margin: 5px auto;
+		margin: 10px auto;
 		max-width: 95%;
 		border-radius: 10px;
 	}
