@@ -23,6 +23,7 @@ export async function registerPeriodicNotifications() {
 	}
 	else{
 		console.log("I don't have the authorization.");
+	}
 }
 
 export async function removePeriodicNotifications() {
