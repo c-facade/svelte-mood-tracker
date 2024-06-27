@@ -13,9 +13,8 @@ It uses Svelte Material UI for some basic components, and chart.js to draw chart
 This application will:
 
 - Allow the user to record data on their mood
-- Show diagrams showing overview and correlations.
-- Use end-to-end encryption to ensure complete privacy
-- Send notifications to remind the user to insert data and view weekly/monthly reports.
+- Show diagrams showing overview of their mood.
+- Send notifications to remind the user to insert data and notify online status.
 - Work offline and synchronize when it's back online.
 
 ## Installation and build
