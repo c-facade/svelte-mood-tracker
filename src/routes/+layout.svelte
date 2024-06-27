@@ -12,31 +12,25 @@
 	let windowWidth: number;	
 	$: stackTop = windowWidth < 840;
 
-/*
-	window.addEventListener("offline", (e) => {
-		console.log("Offline.: "+ e);
-	errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
+	const offlineHandler = () => {
+	if(Notification.permission === "granted"){
+		new Notification("This device is offline: synchronization will resume when it's back online.");
+	}
+	else{
+		errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
 		openBanner.set(true);
-	});
-
-	window.addEventListener("online", (e) => {
-		console.log("Online: "+e);
-	errorMessage.set({red: false, message:"Back online: resuming synchronization."});
-		openBanner.set(true);
-		});
-*/
-
-	const offlineHandler = (e : Event) => {
-		console.log(e);
-	errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
-		openBanner.set(true);
+	}
 	};
 
-	const onlineHandler = (e : Event) => {
-		console.log(e);
-	errorMessage.set({red: false, message:"Back online: resuming synchronization."});
-		openBanner.set(true);
-		};
+	const onlineHandler = () => {
+		if(Notification.permission === "granted"){
+			new Notification("Back online: resuming synchronization.");
+		}
+		else{
+			errorMessage.set({red: false, message:"Back online: resuming synchronization."});
+			openBanner.set(true);
+		}
+	};
 </script>
 
 <svelte:window bind:outerWidth={windowWidth} on:online={onlineHandler} on:offline={offlineHandler}/>

@@ -2,9 +2,13 @@ import { createEventDispatcher } from "svelte";
 
 export async function registerPeriodicNotifications() {
 	const registration = await navigator.serviceWorker.ready;
+	if(!("periodicSync" in registration)){
+		throw new Error("Periodic sync could not be registered");
+	}
 	try {
-		await registration.periodicSync.register("send-notification", {
-			minInterval: 24 * 60 * 60 * 1000,
+			const periodicSync = registration.periodicSync;
+		await periodicSync.register("send-notification", {
+			minInterval: 60 * 1000,
 		});
 		console.log("Successfully registered periodic notifications.");
 	}
@@ -33,8 +37,8 @@ export async function askForPeriodicSync() {
 }
 
 export function mobileNotification(message: string){
-	const dispatch = createEventDispatcher<{notification:{message: string}}>();
-	dispatch('notification', {
+	const dispatch = createEventDispatcher<{notify:{message: string}}>();
+	dispatch('notify', {
 		message
 	});
 }

@@ -1,7 +1,5 @@
 import { dev } from '$app/environment';
 
-console.log("hello????");
-
 if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/service-worker.js', { type: dev ? 'module' : 'classic'})
 	.then((registration) => {
