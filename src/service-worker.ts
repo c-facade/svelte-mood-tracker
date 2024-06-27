@@ -1,6 +1,11 @@
 /// <reference types="@sveltejs/kit" />
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext" />
 /// <reference lib="webworker" />
+
 import { build, files, prerendered, version } from '$service-worker';
+
+const sw = self as unknown as ServiceWorkerGlobalScope;
 
 // creates a unique cache name for this deployment
 const CACHE = `cache-${version}`;
@@ -11,16 +16,17 @@ const ASSETS = [
 	...prerendered
 ]
 
-self.addEventListener('install', (event) => {
+sw.addEventListener('install', (event) => {
+	sw.skipWaiting();
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE);
 		await cache.addAll(ASSETS);
 	}
 
-	event.waitUntil(addFilesToCache);
+	event.waitUntil(addFilesToCache());
 });
 
-self.addEventListener("activate", (event) => {
+sw.addEventListener("activate", (event) => {
 	// remove previous cached data from disk
 	async function deleteOldCaches() {
 		for(const key of await caches.keys()) {
@@ -44,13 +50,14 @@ function showNotification(message : string) {
 	}
 }
 
-self.addEventListener("periodicsync", (event) => {
+sw.addEventListener("periodicsync", (event) => {
 	if(event.tag === "send-notification") {
 		console.log("NOTIFICATION!");
 		showNotification("Track your mood");
 	}
 });
 
-self.addEventListener("notify", (event) => {
+sw.addEventListener("notify", (event) => {
+	console.log("notification")
 	showNotification(event.detail.message);
 });
