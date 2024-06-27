@@ -38,6 +38,7 @@ function createUserSettings(){
 				onlineNotifications: granted
 			});
 		}
+		console.log("usersettings: updated status");
 	}
 	
 	const setPeriodicNotifications = (granted: boolean) => {
@@ -48,6 +49,7 @@ function createUserSettings(){
 				periodicNotifications: granted
 			});
 		}
+		console.log("usersettings: updated status");
 	}
 
 	const reset = () =>
