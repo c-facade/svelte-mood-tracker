@@ -18,16 +18,22 @@ This application will:
 - Send notifications to remind the user to insert data and view weekly/monthly reports.
 - Work offline and synchronize when it's back online.
 
+## Installation and build
+
+To run this application in locale, clone the repository, then inside the project directory run:
+
+	npm install
+	npm run build
+	npm run preview
+
+Since the application is in the development stage, it's not necessary to verify the email. 
+So, it is possible to test the application as a new user without sharing your own email.
 
 ## Next
 
-To do:
+## To do:
 
-- add more default activities
-- notifications
-- make new example user
-
-Less urgent(but necessary for release):
+### Less urgent(only necessary for release):
 
 - work on accessibility
 - work on loading styles faster
@@ -38,13 +44,13 @@ Less urgent(but necessary for release):
 - choose a real name for the application.
 - better logo.
 
-Future improvements:
+###  Future improvements:
 
 - Possibility to edit or delete diary pages.
 - More insights.
 - See archived activities and restore them.
-- Tell user weather they're online or not (catch firebase error).
 - introduce activity icons (with icon picker)
 - allow activities to have a numeric value.
 - calculate correlations between activities and moods.
 - divide activities into feelings/symptoms and activities.
+
