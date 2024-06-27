@@ -162,6 +162,19 @@ function createActStore(){
 		});
 	}
 
+	const changeGroupName = (previous : string, name: string) => {
+		update((acts: Map<string, Activity>) => {
+			for( const a of acts.values()){
+				if(a.group == previous){
+					a.group = name;
+				}
+			}
+			groups.load();
+			if(auth!.currentUser) uploadActivities(acts, auth.currentUser.uid);
+			return acts;
+		});
+	}
+
 
 	
 	return {
@@ -171,7 +184,8 @@ function createActStore(){
 		downloadActivities,
 		addActivity,
 		updateWith, 
-		deleteGroup
+		deleteGroup,
+		changeGroupName
 	}
 }
 
@@ -195,22 +209,6 @@ function createGroups() {
 
 	const { subscribe, set, update } = writable(groups);
 
-	/*
-	const load = (acts: Map<string, Activity>) => {
-		const newGroups : Map<string, string[]> = new Map();
-		for(const a of acts.values())
-			{
-				const list : string[] | undefined = newGroups.get(a.group);
-				if(list !== undefined){
-					newGroups.set(a.group, [...list, a.id]);
-				}
-				else{
-					newGroups.set(a.group, [a.id]);
-				}
-			}
-		set(newGroups);
-		}
-	 */
 	const load = () => {
 		const newGroups : Map<string, string[]> = new Map();
 		const acts = get(activities);
@@ -241,13 +239,33 @@ function createGroups() {
 		});
 	}
 
+	const changeName = (previous: string, name: string) => {
+		update((groups) => {
+			const list : string[] | undefined = groups.get(previous);
+			if(list === undefined) return groups;
+			const acts = get(activities)
+			for(const a of list){
+				const activity = acts.get(a);
+				if(activity !== undefined){
+					activity.group = name;
+				}
+			}
+			groups.delete(previous);
+			groups.set(name, list);
+			console.log(groups);
+			return groups;
+		});
+	}
+	
+	load();
 
 	return{
 		subscribe,
 		set,
 		update,
 		addActivity,
-		load
+		load,
+		changeName
 	}
 }
 

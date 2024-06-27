@@ -2,7 +2,6 @@
 	import { entryDate } from "../stores";
 	entryDate.set(new Date());
 	let datestring = $entryDate.toISOString().slice(0, 16);
-	console.log(datestring);
 	let editing = false;
 
 	function updateDate(){

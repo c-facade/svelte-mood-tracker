@@ -11,7 +11,6 @@
 		import DeleteGroup from './DeleteGroup.svelte';
     import {routes, selectedTab} from '../stores';
     import {goto} from '$app/navigation';
-	import LoadDefault from './LoadDefault.svelte';
     import DateTime from './DateTime.svelte';
     import {get} from 'svelte/store';
 	import { entryDate } from '../stores';
@@ -58,6 +57,7 @@ function addEntry(e : SubmitEvent){
 		}
 		let note = entryNote == "" ? null : entryNote;
 		const date = get(entryDate);
+		console.log(entryDate);
 		const page : DiaryPage = {entries, date, note};
 		console.log(page)
 		diary.addPage(page);
@@ -118,7 +118,6 @@ function addEntry(e : SubmitEvent){
 	<NewActivity surface={surface}/>
 </MenuSurface>
 	</div>
-		<LoadDefault/>
 	</fieldset>
 	<fieldset>
 		<legend>
@@ -129,7 +128,6 @@ function addEntry(e : SubmitEvent){
 			style="width: 90%;"
 	 		bind:value={entryNote}
 	 ></Textfield>
-		{entryNote}
 	</fieldset>
 	<Button variant="raised">OK</Button>
 </form>

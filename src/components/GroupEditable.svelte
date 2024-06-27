@@ -1,9 +1,8 @@
 <script lang="ts">
 	import Textfield from "@smui/textfield";
-    import {createEventDispatcher} from "svelte";
-
+  import {createEventDispatcher} from "svelte";
 	export let name : string;
-	//export let buttonless = true;
+	let newName : string = name;
 	let editing = false;
 	
 	let dispatch = createEventDispatcher();
@@ -22,7 +21,7 @@
 	}
 	
 	function updateAndClose() {
-		dispatch('edited', name)
+		dispatch('edited', newName)
 		editing = false;
 	}
 
@@ -30,7 +29,7 @@
 
 <div class="group-name-container">
 	{#if editing}
-		<Textfield bind:value={name} input$autofocus on:keyup={closeInput} on:blur={updateAndClose}>
+		<Textfield bind:value={newName} input$autofocus on:keyup={closeInput} on:blur={updateAndClose}>
 		</Textfield>
 	{:else}
 		<span role="button" tabindex=0 on:keyup={(e) => {

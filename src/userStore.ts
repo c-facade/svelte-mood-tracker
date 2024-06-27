@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import { auth, db } from "./firebase";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc, getDoc } from "firebase/firestore";
 
 export const isLoggedIn = writable<number>(0);
 
@@ -12,6 +12,16 @@ interface UserSettings {
 	theme: string;
 }
 
+const getStoredSettings = async () => {
+	if(auth.currentUser){
+		const uid = auth.currentUser.uid;
+		const ref = doc(db, "users", uid);
+		const userdoc = await getDoc(ref)
+		return userdoc.data() as UserSettings;
+	}
+	return null;
+}
+
 function createUserSettings(){
 	const { subscribe, set, update } = writable<UserSettings>({
 		username: null,
@@ -20,6 +30,13 @@ function createUserSettings(){
 		periodicNotifications: false,
 		theme: "dark"
 	});
+	
+	const updateFromStorage = async () => {
+		const settings = await getStoredSettings();
+		if(settings != null){
+			set(settings)
+		}
+	}
 
 	const setUsernameAndEmail = (username: string | null, email: string | null) =>
 		{
@@ -70,7 +87,8 @@ function createUserSettings(){
 		setUsernameAndEmail,
 		reset,
 		setOnlineNotifications,
-		setPeriodicNotifications
+		setPeriodicNotifications,
+		updateFromStorage,
 	}
 }
 

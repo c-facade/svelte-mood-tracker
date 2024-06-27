@@ -11,12 +11,20 @@
 	import { openBanner } from "../../stores";
 	import Button from '@smui/button';
   import Settings from "../../components/Settings.svelte";
+    import {onMount} from "svelte";
+
+	onMount(() => {
+		onAuthStateChanged( auth, () => {
+			userSettings.updateFromStorage();
+		})
+	});
 
 	async function signIn(event : CustomEvent) {
 		try {
 			let user = await signInWithEmailAndPassword(auth, event.detail.email, event.detail.password);
 			await updateProfile(user.user, { displayName: event.detail.username });
-			userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
+			//userSettings.setUsernameAndEmail(user.user.displayName, user.user.email);
+			userSettings.updateFromStorage();
 			//await setDoc(userDoc(auth!.currentUser!.uid), $userSettings);
 			isLoggedIn.set(1);
 			selectedTab.set(routes.get('home'));
@@ -43,13 +51,12 @@
 
 </script>
 <main class="centered">
-	<p>Per testare l'applicazione, usa le credenziali "username@gmail.com" e "password".
-	</p>
-
 	{#if $isLoggedIn > 0}
 	<h3 class="roboto-serif">{auth.currentUser ? auth.currentUser.displayName : "error"}</h3>
-	<Settings />
+	<p>
 	<Button on:click={logout} variant="unelevated" class="danger">Log out</Button>
+		</p>
+	<Settings />
 {:else}
 <div>
 	<div class="sign-in-form">

@@ -14,9 +14,6 @@
 				//granted = true;
 				disableOnline = false;
 				disablePeriodic = false;
-				if($userSettings.onlineNotifications){
-					console.log("online notifications allowed");	
-				}
 				if($userSettings.periodicNotifications){
 					registerPeriodicNotifications();
 				}
@@ -71,6 +68,7 @@
 		if(!onlineNotifications){
 			userSettings.setOnlineNotifications(true);
 			var notification = new Notification("You will be notified when the online status changes");
+			mobileNotification("You will be notified when online status changes.");
 			console.log(notification);
 		}
 		else{
@@ -79,22 +77,21 @@
 		}
 	}
 
-	function togglePeriodicNotifications() {
+	async function togglePeriodicNotifications() {
 		if(Notification.permission !== "granted"){
 			alert("You have to allow notifications.");
 			periodicNotifications = false;
 			return;
 		}
 		if(!periodicNotifications){
-			try{	
-				registerPeriodicNotifications();
+			const success = await registerPeriodicNotifications();
+			if(success){
 				userSettings.setPeriodicNotifications(true);
-				var notification = new Notification("You will be notified once a day");
-				console.log(notification.title);
+				console.log("Activated Periodic Notifications");
+				mobileNotification("You will be notified once a day");
 			}
-			catch(e) {
-				var notification = new Notification("Your browser doesn't support periodic sync");
-				console.log(e, notification.title);
+			else{
+				new Notification("Your browser does not support periodic notifications.");
 			}
 		}
 		else{
@@ -107,7 +104,9 @@
 </script>
 <div class="notifications container" style="text-align: start;">
 	<h3>Notification settings</h3>
+	<p>
 	<Button on:click={askPermission}>Allow notifications</Button>
+	</p>
 	<FormField>
 		<Switch bind:checked={onlineNotifications} bind:disabled={disableOnline} on:click={toggleOnlineNotifications}>
 		</Switch>
@@ -121,7 +120,6 @@
 		</Switch>
 		<span slot="label">Remind me to add a new entry</span>
 	</FormField>
-	{periodicNotifications}
 	<p>
 	If you enable this option, you will receive a notification once a day reminding you to track your mood.
 	This will only work if you install this progressive web app on your device.

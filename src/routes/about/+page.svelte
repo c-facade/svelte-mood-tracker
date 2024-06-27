@@ -11,4 +11,6 @@ Its objective is to provide insight on the user's daily moods and what may influ
 <p>
 	Check out the <a href="https://github.com/c-facade/c-facade.github.io">source code</a> on GitHub.
 </p>
+
+<p>This application is a Progressive Web App. Click "add to home screen" in your browser's menu to install it.</p>
 </main>

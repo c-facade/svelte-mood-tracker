@@ -23,19 +23,63 @@ ChartJS.register(
     CategoryScale
 	);
 
-
+interface Day{
+	day: number;
+	value: number;
+	num: number;
+}
 
 function compareDates(a: DiaryPage, b: DiaryPage) {
 	return a.date.getDate() - b.date.getDate();
 }
 
+function sameMonth(today : Date, pageDay: Date){
+	if(today.getFullYear() !== pageDay.getFullYear()){
+		return false;
+	}
+	if(today.getMonth() !== pageDay.getMonth()){
+		return false;
+	}
+	return true
+}
+
+function populateData() {
+	const pages = $diary.toSorted(compareDates);
+	console.log(pages);
+	const today = new Date();
+	const map : Map<number, Day> = new Map([]);
+	for(let page of pages){
+		if(!sameMonth(today, page.date)){
+			continue;
+		}
+		const currentDay = page.date.getDate();
+		if(map.has(currentDay)){
+			let x : Day = map.get(currentDay)!;
+			x.value = (x.value + (page.entries[0].value as number)) / x.num+1;
+			if(isNaN(x.value)) x.value = 1;
+			x.num++;
+		}
+		else{
+			map.set(page.date.getDate(), {
+				day: page.date.getDate(),
+				value: page.entries[0].value as number,
+				num: 1,
+			});
+		}
+	}
+	return Array.from(map.values());
+}
+
+const daysDataset = populateData();
+console.log(daysDataset);
+
 let data = {
-	labels: $diary.toSorted(compareDates).map(page => page.date.getDate()),
+	labels: daysDataset.map((d : Day) => d.day),
 	color: "white",
 	datasets: [
 		{
-			label: "Moods",
-			data: $diary.toSorted(compareDates).map(page => page.entries[0].value as number),
+			label: "Your daily moods",
+			data: daysDataset.map((d: Day) => d.value),
 			borderColor: '#1DE9B6',
 			borderWidth: 2,
 			backgroundColor: '#1DE9B6',
@@ -45,16 +89,13 @@ let data = {
 
 const options = {
 	plugins: {
-		legend: {
-			display: false
-		},
 		tooltip: {
 			enabled: false
 		}
 	},
 	responsive: true,
 	layout: {
-		padding: 20
+		padding: 30
 		}
 }
 

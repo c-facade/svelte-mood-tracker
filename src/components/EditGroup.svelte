@@ -41,10 +41,15 @@
 	}
 
 	function changeName(e : CustomEvent){
-		name = e.detail;
+		const previous = name;
+		const newName = e.detail;
+		console.log("changing name from", previous, "to", newName);
+		activities.changeGroupName(previous, newName);
+		for(const a of temporary){
+			a.group = newName;
+		}
 	}
 </script>
-
 
 <IconButton class="material-symbols-outlined" on:click$preventDefault ={ () => (open=true)}>edit</IconButton>
 <Dialog bind:open>
@@ -74,7 +79,6 @@
 		</Button>
 	</Actions>
 </Dialog>
-
 <style>
 	.activities-container {
 		display: flex;

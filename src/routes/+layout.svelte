@@ -6,7 +6,7 @@
 	import Tab, {Icon, Label} from '@smui/tab';
 	import { errorMessage, openBanner, routes, selectedTab } from '../stores';
 	import BottomAppBar, { AutoAdjust, Section } from '@smui-extra/bottom-app-bar';
-    import ErrorBanner from '../components/ErrorBanner.svelte';
+  import ErrorBanner from '../components/ErrorBanner.svelte';
 	
 	let bottomAppBar: BottomAppBar;
 	let windowWidth: number;	
@@ -14,7 +14,9 @@
 
 	const offlineHandler = () => {
 	if(Notification.permission === "granted"){
-		new Notification("This device is offline: synchronization will resume when it's back online.");
+		new Notification("This device is offline", {
+			body: "synchronization will resume when it's back online."
+		});
 	}
 	else{
 		errorMessage.set({red: false, message:"This device is offline: synchronization will resume when it's back online."});
