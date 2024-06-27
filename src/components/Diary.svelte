@@ -15,7 +15,6 @@
 			if(user){
 				isLoggedIn.set(1);
 				diary.updateFromFirestore();
-				console.log($diary);
 			}
 			else{
 				isLoggedIn.set(-1);

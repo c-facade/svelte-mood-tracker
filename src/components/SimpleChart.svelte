@@ -45,7 +45,6 @@ function sameMonth(today : Date, pageDay: Date){
 
 function populateData() {
 	const pages = $diary.toSorted(compareDates);
-	console.log(pages);
 	const today = new Date();
 	const map : Map<number, Day> = new Map([]);
 	for(let page of pages){
@@ -71,7 +70,6 @@ function populateData() {
 }
 
 const daysDataset = populateData();
-console.log(daysDataset);
 
 let data = {
 	labels: daysDataset.map((d : Day) => d.day),
